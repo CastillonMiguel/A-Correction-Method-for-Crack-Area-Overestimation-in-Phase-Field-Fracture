@@ -1,7 +1,7 @@
 A Correction Method for Crack Area Overestimation in Phase-Field Fracture
 =========================================================================
 
-.. image:: https://raw.githubusercontent.com/CastillonMiguel/DoubleGradientCorrectionMethod/main/docs/source/_static/logo_name.png
+.. image:: https://raw.githubusercontent.com/CastillonMiguel/A-Correction-Method-for-Crack-Area-Overestimation-in-Phase-Field-Fracture/main/docs/source/_static/logo_name.png
    :target: https://DoubleGradientCorrectionMethod.readthedocs.io/en/latest/
    :alt: A Correction Method for Crack Area Overestimation in Phase-Field Fracture
 

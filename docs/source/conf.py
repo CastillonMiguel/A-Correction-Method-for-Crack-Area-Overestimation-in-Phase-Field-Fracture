@@ -240,7 +240,7 @@ html_show_sourcelink = False
 html_theme_options = {
     "external_links": [],
     "footer_start": ["sphinx-version"],
-    "github_url": "https://github.com/CastillonMiguel/A-Phase-Field-Approach-to-Fracture-and-Fatigue-Analysis-Bridging-Theory-and-Simulation",
+    "github_url": "https://github.com/CastillonMiguel/A-Correction-Method-for-Crack-Area-Overestimation-in-Phase-Field-Fracture",
     "navbar_align": "left",
     'icon_links': [
         {

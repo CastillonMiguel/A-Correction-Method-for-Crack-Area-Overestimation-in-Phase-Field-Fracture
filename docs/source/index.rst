@@ -51,7 +51,7 @@ The proposed methodology is validated against benchmarks with analytical solutio
         url={}, 
     }
 
-All the files are provided in the following `GitHub Repository <https://github.com/CastillonMiguel/A-Phase-Field-Approach-to-Fracture-and-Fatigue-Analysis-Bridging-Theory-and-Simulation>`_
+All the files are provided in the following `GitHub Repository <https://github.com/CastillonMiguel/A-Correction-Method-for-Crack-Area-Overestimation-in-Phase-Field-Fracture>`_
 
 Since the simulations were conducted using the open-source **PhaseFieldX** :footcite:t:`code_phasefieldx` library, the implementation details of the models can be found in the **PhaseFieldX** documentation and source code.
 
