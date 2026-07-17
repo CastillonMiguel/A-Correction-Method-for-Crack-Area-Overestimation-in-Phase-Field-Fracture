@@ -70,5 +70,6 @@ The **PhaseFieldX** project is designed to simulate and analyze material behavio
 .. toctree::
 
    indications/index
+   auto_examples/index
    references/index.rst
    related/index.rst

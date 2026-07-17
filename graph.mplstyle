@@ -1,0 +1,56 @@
+# Matplotlib style configuration for scientific publication on A4 paper
+
+# Use LaTeX fonts and rendering for high-quality typography
+text.usetex: True
+font.family: serif
+font.serif: Computer Modern Roman, Times New Roman
+pgf.texsystem: pdflatex
+mathtext.fontset: cm
+
+# Figure sizes for A4 paper (210mm × 297mm or 8.27in × 11.69in)
+# Full width figure (accounts for margins)
+figure.figsize: 6.5, 4.5  # in inches for full width
+# figure.constrained_layout.use: True  # Better spacing management
+
+# Font sizes - slightly increased for better readability
+font.size: 16           # Base font size
+axes.labelsize: 17      # Axis labels
+axes.titlesize: 17      # Title size
+legend.fontsize: 15      # Legend text
+xtick.labelsize: 15      # X-tick labels
+ytick.labelsize: 15      # Y-tick labels
+
+# Line styles and colors for scientific visualization
+lines.linewidth: 1.25
+lines.markersize: 4.5
+# axes.prop_cycle: cycler('color', ['#0173B2', '#DE8F05', '#029E73', '#D55E00', '#CC78BC', '#CA9161', '#FBAFE4', '#949494', '#ECE133', '#56B4E9'])
+scatter.marker: o
+
+# Grid and spines for clean, professional appearance
+axes.grid: True
+grid.alpha: 0.25
+grid.linestyle: --
+axes.spines.top: False
+axes.spines.right: False
+
+# Legend styling
+legend.frameon: True
+legend.framealpha: 0.8
+legend.edgecolor: 0.8
+
+# Output settings for publication quality
+savefig.dpi: 600       # Higher DPI for print quality
+savefig.format: pdf    # Vector format preferred for publication
+savefig.bbox: tight    # Tight bounding box to minimize whitespace
+savefig.pad_inches: 0.05
+savefig.transparent: False
+
+# For multi-part figures
+figure.subplot.wspace: 0.25  # Width space between subplots
+figure.subplot.hspace: 0.25  # Height space between subplots
+
+# Tick direction and minor ticks
+xtick.direction: out
+ytick.direction: out
+xtick.minor.visible: True
+ytick.minor.visible: True
