@@ -26,7 +26,7 @@ import os
 import gmsh
 import pyvista as pv
 
-folder = "central_cracked_3d"
+folder = "central_cracked_3D"
 
 ###############################################################################
 # Reference
