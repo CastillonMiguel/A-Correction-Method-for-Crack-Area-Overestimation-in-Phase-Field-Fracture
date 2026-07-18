@@ -220,21 +220,25 @@ import matplotlib.pyplot as plt
 import numpy as np
 from phasefieldx.PostProcessing.ReferenceResult import AllResults
 import os
-
+import pandas as pd
 
 ###############################################################################
 # Load results
-energy = np.zeros(len(div))
-energy_phi = np.zeros(len(div))
-energy_gradphi= np.zeros(len(div))
-for i in range(0,len(div)):
-    simulation_folder = os.path.join(combo_folder_name, str(i))
-    S = AllResults(simulation_folder)
+if run_combo==True: 
+    energy = np.zeros(len(div))
+    energy_phi = np.zeros(len(div))
+    energy_gradphi= np.zeros(len(div))
+    for i in range(0,len(div)):
+        simulation_folder = os.path.join(combo_folder_name, str(i))
+        S = AllResults(simulation_folder)
 
-    energy[i] = 2*S.energy_files["total.energy"]["gamma"][0]
-    energy_phi[i] = 2*S.energy_files["total.energy"]["gamma_phi"][0]
-    energy_gradphi[i] = 2*S.energy_files["total.energy"]["gamma_gradphi"][0]
-
+        energy[i] = 2*S.energy_files["total.energy"]["gamma"][0]
+        energy_phi[i] = 2*S.energy_files["total.energy"]["gamma_phi"][0]
+        energy_gradphi[i] = 2*S.energy_files["total.energy"]["gamma_gradphi"][0]
+else:
+    energy = pd.read_csv(os.path.join(combo_folder_name, "energy.num_crack_surface"), usecols=[1], delimiter="\t").to_numpy().flatten()
+    energy_phi = pd.read_csv(os.path.join(combo_folder_name, "energy.num_crack_surface"), usecols=[2], delimiter="\t").to_numpy().flatten()
+    energy_gradphi = pd.read_csv(os.path.join(combo_folder_name, "energy.num_crack_surface"), usecols=[3], delimiter="\t").to_numpy().flatten()
 
 import sys
 # Import plotting configuration
