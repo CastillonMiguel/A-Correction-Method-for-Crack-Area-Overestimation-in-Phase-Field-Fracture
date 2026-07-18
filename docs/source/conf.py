@@ -142,7 +142,7 @@ sphinx_gallery_conf = {
         '../../examples/TheoryPhaseField',
         '../../examples/CrackSurfaceOverstimation',
         '../../examples/CrackSurfaceFemError',
-        # '../../examples/Central_cracked_all',
+        '../../examples/Central_cracked_all_at2',
         '../../examples/Central_cracked_3d',
         '../../examples/Phase_Field_Compact_Specimen',
         # '../../examples/Compare_Central_Cracked',
