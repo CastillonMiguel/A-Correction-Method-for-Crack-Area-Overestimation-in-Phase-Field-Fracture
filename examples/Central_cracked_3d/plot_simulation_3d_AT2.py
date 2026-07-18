@@ -769,7 +769,7 @@ if save_images_3d:
         plotter.close()
         print(f"Image saved to {image_path}")
 
-    save_image = True
+    save_image = False
     if save_image:
         # Iterate over all .vtu files in the directory
         for filename in vtu_files:
