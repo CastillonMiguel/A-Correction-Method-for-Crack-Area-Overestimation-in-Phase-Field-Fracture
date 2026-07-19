@@ -17,6 +17,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
 
@@ -52,7 +53,7 @@ def load_simulation_data(path):
         print(f"Warning: Could not load data for {path}: {e}")
         return {"ref": None, "bourdin": None, "dgcm": None}
 
-simulation = load_simulation_data("../central_cracked_all_at2/results_cc_sim_8")
+simulation = load_simulation_data("../Central_cracked_all_at2/results_cc_sim_8")
 
 
 color_1, linestyle_1, marker_1 = pcfg.color_orangered, '-', 'o' #ref
@@ -63,7 +64,6 @@ markevery_1 = max(1, len(simulation["ref"]["displacement"])//20) if simulation["
 
 # %%
 # From Linear elastic fracture mechanics theory
-# :ref:`ref_lefm_center_cracked`
 lefm_solution = np.loadtxt("../Papers_Data/A_Phase_Field_Approach_to_Fatigue/results_central_cracked/center_cracked.lefm", delimiter="\t", skiprows=1)
 a_lefm = lefm_solution[:,0]
 k_lefm = 1/lefm_solution[:,2]

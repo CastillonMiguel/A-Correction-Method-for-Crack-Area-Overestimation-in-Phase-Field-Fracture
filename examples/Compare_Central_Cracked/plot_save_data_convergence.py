@@ -150,7 +150,6 @@ if run:
     # Save LEFM data for comparison
     # -----------------------------
     # From Linear elastic fracture mechanics theory
-    # :ref:`ref_lefm_center_cracked`
     results_lefm =  pd.read_csv("../Papers_Data/A_Phase_Field_Approach_to_Fatigue/results_central_cracked/a0_05.lefm_problem", delimiter="\t", comment="#", header=0)
 
     # Save LEFM data

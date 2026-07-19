@@ -17,6 +17,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
 
@@ -54,7 +55,7 @@ def load_simulation_data(path):
 
 # Define paths and load data
 # Common base path for all simulation results
-base_results_path = "../central_cracked_all_at2"
+base_results_path = "../Central_cracked_all_at2"
 
 # NOTE: All paths start with ../central_cracked_all_at2
 # Define only the final part of each path, then prepend base_results_path to all
@@ -124,7 +125,6 @@ markevery_8 = max(1, len(simulation_8["ref"]["displacement"])//20) if simulation
 
 # %%
 # From Linear elastic fracture mechanics theory
-# :ref:`ref_lefm_center_cracked`
 lefm_solution = np.loadtxt("../Papers_Data/A_Phase_Field_Approach_to_Fatigue/results_central_cracked/center_cracked.lefm", delimiter="\t", skiprows=1)
 a_lefm = lefm_solution[:,0]
 k_lefm = 1/lefm_solution[:,2]
