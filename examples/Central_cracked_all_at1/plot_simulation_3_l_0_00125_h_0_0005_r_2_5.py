@@ -109,7 +109,7 @@ Data = Input(E=210.0,
 # ---------------
 # The mesh is generated using Gmsh and saved as a 'mesh.msh' file. For more details 
 # on how to create the mesh, refer to the :ref:`ref_example_geo_gomes` examples.
-msh_file = os.path.join("../GmshGeoFiles/Central_cracked/h_0_0005.msh")  # Path to the mesh file
+msh_file = os.path.join("../GmshGeoFiles/central_cracked/h_0_0005.msh")  # Path to the mesh file
 # msh_file = os.path.join("mesh.msh")  # Path to the mesh file
 gdim = 2                                    # Geometric dimension of the mesh
 gmsh_model_rank = 0                        # Rank of the Gmsh model in a parallel setting
@@ -266,7 +266,6 @@ S = AllResults(Data.results_folder_name)
 # file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000034.vtu"))
 # file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
-
-from save_function import save_central_crack, plot_comparison_results
+from save_function_at1 import save_central_crack, plot_comparison_results
 save_central_crack(S, h, Data, a0=0.5, case='AT1')
 plot_comparison_results(Data)

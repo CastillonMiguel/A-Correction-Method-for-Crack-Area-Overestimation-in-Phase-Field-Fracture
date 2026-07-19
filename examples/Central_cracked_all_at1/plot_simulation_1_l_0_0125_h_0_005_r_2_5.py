@@ -268,6 +268,6 @@ S = AllResults(Data.results_folder_name)
 # file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000034.vtu"))
 # file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
-from save_function import save_central_crack, plot_comparison_results
+from save_function_at1 import save_central_crack, plot_comparison_results
 save_central_crack(S, h, Data, a0=0.5, case='AT1')
 plot_comparison_results(Data)
