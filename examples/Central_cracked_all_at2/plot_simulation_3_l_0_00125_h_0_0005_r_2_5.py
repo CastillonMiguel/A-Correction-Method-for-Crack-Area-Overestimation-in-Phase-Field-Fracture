@@ -109,7 +109,7 @@ Data = Input(E=210.0,
 # ---------------
 # The mesh is generated using Gmsh and saved as a 'mesh.msh' file. For more details 
 # on how to create the mesh, refer to the :ref:`ref_example_geo_gomes` examples.
-msh_file = os.path.join("../GmshGeoFiles/Central_cracked/h_0_0005.msh")  # Path to the mesh file
+msh_file = os.path.join("../GmshGeoFiles/central_cracked/h_0_0005.msh")  # Path to the mesh file
 gdim = 2                                    # Geometric dimension of the mesh
 gmsh_model_rank = 0                        # Rank of the Gmsh model in a parallel setting
 mesh_comm = mpi4py.MPI.COMM_WORLD            # MPI communicator for parallel computation
