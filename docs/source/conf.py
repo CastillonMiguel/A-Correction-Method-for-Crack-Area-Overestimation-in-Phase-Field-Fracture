@@ -244,7 +244,7 @@ html_theme_options = {
     'icon_links': [
         {
             'name': 'The Paper',
-            'url': 'https://arxiv.org/abs/2509.08939',
+            'url': 'https://arxiv.org/abs/2605.03731',
             'icon': 'fa fa-file-text fa-fw',
         },
     ],

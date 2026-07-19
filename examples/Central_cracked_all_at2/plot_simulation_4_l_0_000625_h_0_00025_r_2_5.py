@@ -110,7 +110,6 @@ Data = Input(E=210.0,
 # The mesh is generated using Gmsh and saved as a 'mesh.msh' file. For more details 
 # on how to create the mesh, refer to the :ref:`ref_example_geo_gomes` examples.
 msh_file = os.path.join("../GmshGeoFiles/central_cracked/h_0_00025.msh")  # Path to the mesh file
-# msh_file = os.path.join("mesh.msh")  # Path to the mesh file
 gdim = 2                                    # Geometric dimension of the mesh
 gmsh_model_rank = 0                        # Rank of the Gmsh model in a parallel setting
 mesh_comm = mpi4py.MPI.COMM_WORLD            # MPI communicator for parallel computation
@@ -118,7 +117,11 @@ mesh_comm = mpi4py.MPI.COMM_WORLD            # MPI communicator for parallel com
 # %%
 # The mesh, cell markers, and facet markers are extracted from the 'mesh.msh' file
 # using the `read_from_msh` function.
-msh, cell_markers, facet_markers = dolfinx.io.gmshio.read_from_msh(msh_file, mesh_comm, gmsh_model_rank, gdim)
+mesh_data = dolfinx.io.gmsh.read_from_msh(msh_file, mesh_comm, gmsh_model_rank, gdim)
+msh = mesh_data.mesh
+cell_markers = mesh_data.cell_tags
+facet_markers = mesh_data.facet_tags
+fdim = msh.topology.dim - 1 # Dimension of the mesh facets
 
 fdim = msh.topology.dim - 1 # Dimension of the mesh facets
 h=0.00025
