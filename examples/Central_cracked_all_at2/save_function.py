@@ -3,6 +3,7 @@ r"""
 
 Simulation
 ----------
+The following code is used to save the results of the simulation in a format that can be easily read by other programs. The results are saved in a tab-separated format with a header that describes the columns.
 
 """
 
