@@ -55,26 +55,21 @@ def load_simulation_data(path):
 
 # Define paths and load data
 # Common base path for all simulation results
-base_results_path = "../Central_cracked_all_AT1"
+base_results_path = "../Central_cracked_all_at1"
 
-# NOTE: All paths start with ../central_cracked_all_at2
+# NOTE: All paths start with ../central_cracked_all_at1
 # Define only the final part of each path, then prepend base_results_path to all
 path_list_final = [
     "results_cc_sim_1",
     "results_cc_sim_2",
-    "results_cc_sim_3",
-    # "results_cc_sim_4",
-    # "results_cc_sim_5",
-    # "results_cc_sim_6",
-    # "results_cc_sim_7",
-    # "results_cc_sim_8",
+    "results_cc_sim_3"
 ]
 path_list = [f"{base_results_path}/{final}" for final in path_list_final]
 
 
 # l/h = 2.5 simulations
-alpha_lh_25 = np.array([1.0, 0.2, 0.1, 0.05])
-beta_lh_25  = np.array([1.0, 0.2, 0.1, 0.05])
+# alpha_lh_25 = np.array([1.0, 0.2, 0.1, 0.05])
+# beta_lh_25  = np.array([1.0, 0.2, 0.1, 0.05])
 
 simulation_1 = load_simulation_data(path_list[0])
 simulation_2 = load_simulation_data(path_list[1])
@@ -84,12 +79,10 @@ simulation_3 = load_simulation_data(path_list[2])
 label_lh_1 = r"$l=0.0125$"
 label_lh_2 = r"$l=0.0025$"
 label_lh_3 = r"$l=0.00125$"
-label_lh_4 = r"$l=0.000625$"
 
 color_1, linestyle_1, marker_1 = pcfg.color_blue, '-', 'o'
 color_2, linestyle_2, marker_2 = pcfg.color_orangered, '--', 's'
 color_3, linestyle_3, marker_3 = pcfg.color_gold, '--', '^'
-color_4, linestyle_4, marker_4 = pcfg.color_black, '--', 'd'
 
 markevery_1 = max(1, len(simulation_1["ref"]["displacement"])//20) if simulation_1["ref"] is not None else 1
 markevery_2 = max(1, len(simulation_2["ref"]["displacement"])//20) if simulation_2["ref"] is not None else 1
