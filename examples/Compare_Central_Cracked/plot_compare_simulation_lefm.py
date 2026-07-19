@@ -1,8 +1,8 @@
 r"""
 .. _ref_compare_pff_lefm:
 
-Length Scale Parameter Study for Phase-Field Fracture
------------------------------------------------------
+Compare simulation with LEFM
+----------------------------
 
 """
 
@@ -19,7 +19,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 
 results_folder = "results_compare_pff_lefm"
 if not os.path.exists(results_folder):
@@ -56,17 +55,11 @@ def load_simulation_data(path):
 simulation = load_simulation_data("../central_cracked_all_at2/results_cc_sim_8")
 
 
-color_1, linestyle_1, marker_1 = pcfg.color_blue, '-', 'o'
-
 color_1, linestyle_1, marker_1 = pcfg.color_orangered, '-', 'o' #ref
 color_2, linestyle_2, marker_2 = pcfg.color_green, '-.', 's' #bourdin
 color_3, linestyle_3, marker_3 = pcfg.color_red, '--', '^' #dgcm
 
-
 markevery_1 = max(1, len(simulation["ref"]["displacement"])//20) if simulation["ref"] is not None else 1
-
-
-
 
 # %%
 # From Linear elastic fracture mechanics theory

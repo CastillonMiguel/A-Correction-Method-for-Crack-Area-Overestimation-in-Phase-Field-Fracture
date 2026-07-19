@@ -1,5 +1,5 @@
 r"""
-.. _ref_convergence_l_constant_lh_2_5::
+.. _ref_convergence_l_constant_lh_2_5_4_0:
 
 Influence of the lenght scale parameter for constants l/h
 ---------------------------------------------------------
@@ -35,7 +35,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 from matplotlib.lines import Line2D
 
 results_folder = "results_convergence_l_constant_lh_2_5_4_0"

@@ -1,5 +1,5 @@
 r"""
-.. _ref_compare_lh_constant_length_scale::
+.. _ref_compare_lh_constant_length_scale:
 
 Influence of the mesh size for constant length scale l/h
 --------------------------------------------------------
@@ -39,7 +39,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 
 results_folder = "results_convergence_h_constant_l"
 if not os.path.exists(results_folder):

@@ -1,5 +1,5 @@
 r"""
-.. _ref_convergence_l_constant_lh_2_5::
+.. _ref_convergence_l_constant_lh_2_5:
 
 Influence of the lenght scale parameter for constants l/h
 ---------------------------------------------------------

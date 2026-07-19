@@ -1,8 +1,8 @@
 r"""
 .. _ref_compare_lenght_scale:
 
-Length Scale Parameter Study for Phase-Field Fracture
------------------------------------------------------
+Compare length scale AT2
+------------------------
 
 """
 
@@ -19,7 +19,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 
 results_folder = "results_compare_lenght_scale"
 if not os.path.exists(results_folder):
@@ -80,11 +79,6 @@ simulation_1 = load_simulation_data(path_list[0])
 simulation_2 = load_simulation_data(path_list[1])
 simulation_3 = load_simulation_data(path_list[2])
 simulation_4 = load_simulation_data(path_list[3])
-
-# label_lh_1 = r"$l/h=0.0125/0.05$"
-# label_lh_2 = r"$l/h=0.0025/0.001$"
-# label_lh_3 = r"$l/h=0.00125/0.0005$"
-# label_lh_4 = r"$l/h=0.000625/0.00025$"
 
 label_lh_1 = r"$l=0.0125$"
 label_lh_2 = r"$l=0.0025$"
@@ -191,7 +185,5 @@ ax_l1_uf.legend()
 ax_l1_uf.set_ylim(45, 70.0)
 
 plt.savefig(os.path.join(results_folder, "force_stiffness_constant_l_h_2_5"))
-
-
 
 plt.show()

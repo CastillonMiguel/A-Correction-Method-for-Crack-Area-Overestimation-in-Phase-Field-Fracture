@@ -1,8 +1,8 @@
 r"""
 .. _ref_compare_lenght_scale_at1:
 
-Length Scale Parameter Study for Phase-Field Fracture
------------------------------------------------------
+Compare length scale AT1
+------------------------
 
 """
 
@@ -19,7 +19,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 
 results_folder = "results_compare_lenght_scale_AT1"
 if not os.path.exists(results_folder):
@@ -131,7 +130,6 @@ ax_l1_uf.axhline(y=1+2*1/(c0*hdivl), color=color_lefm, linestyle='-', label="Bou
 ax_l1_uf.plot(simulation_1["dgcm"]["gamma"], simulation_1["dgcm"]["Ofactor"], color=color_1, linestyle=linestyle_1, label=label_lh_1, markevery=markevery_1, marker=marker_1)
 ax_l1_uf.plot(simulation_2["dgcm"]["gamma"], simulation_2["dgcm"]["Ofactor"], color=color_2, linestyle=linestyle_2, label=label_lh_2, markevery=markevery_2, marker=marker_2)
 ax_l1_uf.plot(simulation_3["dgcm"]["gamma"], simulation_3["dgcm"]["Ofactor"], color=color_3, linestyle=linestyle_3, label=label_lh_3, markevery=markevery_3, marker=marker_3)
-# ax_l1_uf.plot(simulation_4["dgcm"]["gamma"], simulation_4["dgcm"]["Ofactor"], color=color_4, linestyle=linestyle_4, label=label_lh_4, markevery=markevery_4, marker=marker_4)
 
 ax_l1_uf.set_xlabel(pcfg.gamma_label)
 ax_l1_uf.set_ylabel(pcfg.correction_factor)
@@ -152,7 +150,6 @@ ax_l1_uf.plot(results_lefm["P"], results_lefm["P"]/results_lefm["u"], color=colo
 ax_l1_uf.plot(simulation_1["dgcm"]["force"], simulation_1["dgcm"]["stiffness"], color=color_1, linestyle=linestyle_1, label=label_lh_1, markevery=markevery_1, marker=marker_1)
 ax_l1_uf.plot(simulation_2["dgcm"]["force"], simulation_2["dgcm"]["stiffness"], color=color_2, linestyle=linestyle_2, label=label_lh_2, markevery=markevery_2, marker=marker_2)
 ax_l1_uf.plot(simulation_3["dgcm"]["force"], simulation_3["dgcm"]["stiffness"], color=color_3, linestyle=linestyle_3, label=label_lh_3, markevery=markevery_3, marker=marker_3)
-# ax_l1_uf.plot(simulation_4["dgcm"]["force"], simulation_4["dgcm"]["stiffness"], color=color_4, linestyle=linestyle_4, label=label_lh_4, markevery=markevery_4, marker=marker_4)
 
 ax_l1_uf.set_xlabel(pcfg.force_label)
 ax_l1_uf.set_ylabel(pcfg.stiffness_label)

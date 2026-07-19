@@ -1,5 +1,5 @@
 r"""
-.. _ref_compare_l_constant_lh::
+.. _ref_compare_save_data:
 
 Influence of the lenght scale parameter for constants l/h
 ---------------------------------------------------------
@@ -50,7 +50,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
-from scipy.optimize import curve_fit
 
 results_folder = "results_convergence_data"
 if not os.path.exists(results_folder):
