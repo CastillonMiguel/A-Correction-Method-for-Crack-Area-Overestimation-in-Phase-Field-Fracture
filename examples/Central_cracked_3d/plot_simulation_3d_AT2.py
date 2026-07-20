@@ -1,51 +1,48 @@
 r"""
 .. _ref_central_cracked_3d_simulation_at2:
 
-Central Cracked Specimen Simulation in 3D (AT2)
------------------------------------------------
+3D central cracked specimen — AT2 regularization
+-------------------------------------------------
 
-This example models a square plate with a central crack, as illustrated below.
+Three-dimensional phase-field fracture simulation of the central cracked tension specimen
+with **AT2** regularization (:math:`\alpha(\phi) = \phi^2`, :math:`c_0 = 2`), used in the
+paper to demonstrate that the DGCM is directly applicable to 3D problems.
+See :ref:`ref_examples_phase_field_central_crack_3d` for the full problem description,
+material properties, and geometry.
 
-Due to symmetry, only half of the model is considered. The bottom boundary is fixed in both the vertical and out-of-plane directions, while the left boundary is constrained in the horizontal direction. A force is applied at the top. The geometry and boundary conditions are depicted in the figure. The model is discretized using quadrilateral elements.
+**Parameters**
 
-.. code-block::
+- Length scale: :math:`l = 0.00625` mm
+- Mesh size: :math:`h = 0.0025` mm  (:math:`l/h = 2.5`)
+- Specimen thickness: :math:`t = 0.05` mm
+- 3D unstructured Gmsh mesh (``GmshGeoFiles/central_cracked_3D/central_cracked_3d.msh``)
 
-    #           u/\/\/\/\/\/\       u/\/\/\ 
-    #            ||||||||||||        ||||||
-    #            *----------*    o|\ *-----*
-    #            |          |    o|/ |     |
-    #            |    2a    |    o|\ | a   |
-    #            |   ----   |    o|/ *--   |
-    #            |          |    o|\ |     |
-    #            |          |    o|/ |     |
-    #            *----------*        *-----*
-    #            ||||||||||||         /_\/_\ 
-    #     |Y    u\/\/\/\/\/\/          oo oo 
-    #     |
-    #     *---X
+**Boundary conditions**
 
-The material properties—Young's modulus, Poisson's ratio, and the critical energy release rate—are summarized in the table below (see also :ref:`Properties <table_properties_label>`). Young's modulus $E$ and Poisson's ratio $\nu$ can be expressed in terms of the Lamé parameters as follows: $\lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}$ and $\mu = \frac{E}{2(1+\nu)}$.
+- Bottom face (:math:`y = -3` mm): fixed in :math:`y` and :math:`z`.
+- Left faces (:math:`x = -0.5` mm, :math:`|y| > 0.001` mm): fixed in :math:`x` (symmetry).
+- Top face (:math:`y = 3` mm): upward traction, energy-controlled with
+  :math:`c_1 = 1.5`, :math:`c_2 = 1.0`.
 
-.. _table_properties_label:
+**Post-processing**
 
-+----+---------+--------+
-|    | VALUE   | UNITS  |
-+====+=========+========+
-| E  | 210     | kN/mm² |
-+----+---------+--------+
-| nu | 0.3     | [-]    |
-+----+---------+--------+
-| Gc | 0.0027  | kN/mm  |
-+----+---------+--------+
-| l  | 0.015   | mm     |
-+----+---------+--------+
+Four correction methods are applied and saved:
 
+- ``results.pff`` — reference (no correction).
+- ``results_corrected_bourdin.pff`` — Bourdin factor :math:`1 + h/(c_0 l)`.
+- ``results_corrected_gradient.pff`` — DGCM.
+- ``results_corrected_skeleton.pff`` — skeletonization reference (requires
+  ``crack_measurement/interpolated_step_time_crack_length.txt`` from :ref:`ref_skeleton_3d`).
+
+The script also prints LaTeX tables of crack area and relative error at three selected
+propagation stages for direct inclusion in the paper.
 """
 
 ###############################################################################
 # Import necessary libraries
 # --------------------------
 import numpy as np
+import pyvista as pv
 import dolfinx
 import mpi4py
 import petsc4py
@@ -275,8 +272,8 @@ c2 = 1.0
 S = AllResults(Data.results_folder_name)
 
 # # pv.start_xvfb()
-# file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000034.vtu"))
-# file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
+file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000060.vtu"))
+file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
 
 # from save_function import save_central_crack, plot_comparison_results
@@ -389,7 +386,7 @@ def save_central_crack(S, h, Data, a0=0.5):
     ###############################################################################
     # Skeleton correction
     # -------------------
-    measure=True
+    measure=False
     if measure:
         results_a_measured = np.loadtxt(os.path.join(Data.results_folder_name,"crack_measurement/interpolated_step_time_crack_length.txt"), skiprows=1)
         crack_measured = results_a_measured[:,1]*thickness
