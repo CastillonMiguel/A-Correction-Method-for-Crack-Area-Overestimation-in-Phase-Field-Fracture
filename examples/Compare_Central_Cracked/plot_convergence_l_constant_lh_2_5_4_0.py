@@ -1,15 +1,29 @@
 r"""
 .. _ref_convergence_l_constant_lh_2_5_4_0:
 
-Influence of the lenght scale parameter for constants l/h
----------------------------------------------------------
+Convergence of peak force and crack length vs. :math:`l` at :math:`l/h = 2.5` and :math:`4.0` (AT2)
+-----------------------------------------------------------------------------------------------------
 
-In this file the effect of the length scale parameter is studied for a constant ratio $l/h$.
-So for all simulation under analisys a minimun relation of $l/h=2.5$ is kept, by this way avoinding the
-effect finite element error related to the profile captured.
+This script produces two log–log convergence plots that compare the three correction methods
+as :math:`l \to 0`, for both the :math:`l/h = 2.5` and :math:`l/h = 4.0` simulation groups.
+Solid lines denote :math:`l/h = 2.5`; dashed lines denote :math:`l/h = 4.0`.
+
+- **Peak force** :math:`P_{\max}`, normalized by the LEFM reference, is expected to converge
+  to 1 with the DGCM but shows a persistent overshoot with the uncorrected and Bourdin methods.
+- **Crack length** :math:`\Gamma` at a fixed stiffness threshold (38.53 kN/mm), normalized by the
+  LEFM value, quantifies how accurately each method tracks the physical crack length.
+
+For both groups the Bourdin factor is constant (it depends only on :math:`l/h`), so its
+normalized results are identical within each group and appear as straight horizontal lines.
+
+**Requires** ``results_convergence_data/`` files produced by :ref:`ref_compare_save_data`.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack`)
+
+*Group A —* :math:`l/h = 2.5`:
 
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| #                   | $\alpha$       | $\theta$       | Length scale $l$ (mm)         | Mesh size $h$ (mm)       | $l/h$       |
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
 +=====================+================+================+===============================+==========================+=============+
 | :ref:`ref_cc_sim1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
@@ -20,6 +34,19 @@ effect finite element error related to the profile captured.
 | :ref:`ref_cc_sim4`  | 0.05           | 0.05           | 0.000625                      | 0.000250                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 
+*Group B —* :math:`l/h = 4.0`:
+
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
++=====================+================+================+===============================+==========================+=============+
+| :ref:`ref_cc_sim5`  | 1.0            | 0.625          | 0.012500                      | 0.003125                 | 4.0         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim6`  | 0.2            | 0.125          | 0.002500                      | 0.000625                 | 4.0         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim7`  | 0.1            | 0.0625         | 0.001250                      | 0.0003125                | 4.0         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim8`  | 0.05           | 0.03125        | 0.000625                      | 0.00015625               | 4.0         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 """
 
 ###############################################################################

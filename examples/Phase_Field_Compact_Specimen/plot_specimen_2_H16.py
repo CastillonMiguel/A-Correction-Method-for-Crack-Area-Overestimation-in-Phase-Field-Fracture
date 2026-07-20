@@ -1,13 +1,36 @@
 r"""
 .. _ref_phase_field_compact_specimen_2_H16:
 
-Specimen 2
-----------
+Specimen 2 — curved crack (:math:`H = +1.6` mm)
+------------------------------------------------
 
-This example demonstrates the simulation of a compact specimen with a phase-field fracture model. The specimen geometry corresponds to a configuration where the parameter $H$ is set to 1.6 mm.
+Compact tension specimen with internal voids offset by :math:`H = +1.6` mm, producing a
+curvilinear crack path. This is one of the two curved-crack configurations from
+:footcite:t:`example_Wagner2018_phd_thesis`, used to test the DGCM on non-straight cracks.
+See :ref:`ref_examples_phase_field_compact_specimen` for material properties and
+simulation parameters common to all specimens.
 
-The mesh used for this simulation is generated using Gmsh and is based on the geometry described in :ref:`ref_example_geo_specimen_2_H16`. This geometry includes predefined regions and boundary markers essential for applying boundary conditions and loads during the simulation.
+- Mesh: ``GmshGeoFiles/Compact_specimen/specimen_2_H16.msh``
+- Length scale: :math:`l = 0.1` mm, mesh size: :math:`h = 0.04` mm (:math:`l/h = 2.5`)
+- Initial crack: :math:`a_0 = 0.2 b = 8` mm, specimen thickness: :math:`B = 3.20` mm
 
+**Boundary conditions**
+
+- Bottom of bottom loading hole (facet 203): fully fixed (:math:`u_x = u_y = 0`).
+- Top of top loading hole (facet 204): upward traction (energy-controlled).
+
+**Post-processing**
+
+Four correction methods are applied inline and saved:
+
+- ``results.pff`` — reference.
+- ``results_bourdin.pff`` — Bourdin correction.
+- ``results_dgcm.pff`` — DGCM.
+- ``results_skeleton.pff`` — skeleton (requires
+  ``crack_measurement/interpolated_step_time_crack_length.txt``).
+
+Plots generated: correction factor :math:`\mathcal{F}` vs. crack length, force vs.
+displacement, and stiffness vs. crack length.
 """
 
 ###############################################################################

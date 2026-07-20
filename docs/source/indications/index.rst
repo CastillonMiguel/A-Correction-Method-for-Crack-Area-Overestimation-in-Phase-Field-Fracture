@@ -8,9 +8,9 @@ The simulation results and reference data are organized into two components:
     Three different correction methods are applied to the phase-field results, generating separate ``.pff`` files for each method:
 
     * ``results.pff``: Uncorrected results (equivalent to a constant correction factor of 1).
-    * ``results_dgcm.pff``: Results using the Double Gradient Correction Method (DGCM).
-    * ``results_bourdin.pff``: Results using the Bourdin method.
-    * ``results_skeleton.pff``: Results using the Skeletonization method.
+    * ``results_corrected_gradient.pff``: Results using the Double Gradient Correction Method (DGCM).
+    * ``results_corrected_bourdin.pff``: Results using the Bourdin method.
+    * ``results_corrected_skeleton.pff``: Results using the Skeletonization method.
 
 * **Reference Data:** Additional data from articles or other references, saved in files with the ``.databib`` extension.
 

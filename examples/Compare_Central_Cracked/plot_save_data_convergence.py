@@ -1,15 +1,36 @@
 r"""
 .. _ref_compare_save_data:
 
-Influence of the lenght scale parameter for constants l/h
----------------------------------------------------------
+Pre-processing: extract and save convergence metrics (AT2)
+----------------------------------------------------------
 
-In this file the effect of the length scale parameter is studied for a constant ratio $l/h$.
-So for all simulation under analisys a minimun relation of $l/h=2.5$ is kept, by this way avoinding the
-effect finite element error related to the profile captured.
+This script must be run **before** the convergence plot scripts. It loads the raw post-processed
+results from all 11 AT2 simulations (see :ref:`ref_examples_phase_field_central_crack`) and
+extracts a set of scalar convergence metrics from each, saving them as compact tabular files
+in the ``results_convergence_data/`` folder.
+
+The control flag ``run = True`` must be set to execute the data extraction.
+
+**Metrics extracted per simulation**
+
+- Peak force and corresponding crack length.
+- Structural stiffness at :math:`\Gamma = 0.75` mm and :math:`\Gamma = 0.90` mm.
+- Correction factor :math:`\mathcal{F}` at :math:`\Gamma = 0.55`, :math:`0.75`, and :math:`0.90` mm.
+- Crack length at structural stiffness thresholds of 52.44 and 38.53 kN/mm.
+
+**Output files** (saved to ``results_convergence_data/``)
+
+- ``convergence_data.lefm`` — scalar LEFM reference values.
+- ``convergence_reference.pff`` — metrics from the uncorrected simulations.
+- ``convergence_bourdin.pff`` — metrics from the Bourdin-corrected simulations.
+- ``convergence_dgcm.pff`` — metrics from the DGCM-corrected simulations.
+
+**Simulations processed** (all from :ref:`ref_examples_phase_field_central_crack`)
+
+:ref:`ref_cc_sim1` – :ref:`ref_cc_sim11`
 
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| #                   | $\alpha$       | $\theta$       | Length scale $l$ (mm)         | Mesh size $h$ (mm)       | $l/h$       |
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
 +=====================+================+================+===============================+==========================+=============+
 | :ref:`ref_cc_sim1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
@@ -19,7 +40,7 @@ effect finite element error related to the profile captured.
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 | :ref:`ref_cc_sim4`  | 0.05           | 0.05           | 0.000625                      | 0.000250                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| :ref:`ref_cc_sim5`  | 1.0            | 0.6250         | 0.012500                      | 0.003125                 | 4.0         |
+| :ref:`ref_cc_sim5`  | 1.0            | 0.625          | 0.012500                      | 0.003125                 | 4.0         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 | :ref:`ref_cc_sim6`  | 0.2            | 0.125          | 0.002500                      | 0.000625                 | 4.0         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
@@ -33,8 +54,6 @@ effect finite element error related to the profile captured.
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 | :ref:`ref_cc_sim11` | 0.2            | 0.0833         | 0.002500                      | 0.0004166                | 6.0         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-
-
 """
 
 ###############################################################################

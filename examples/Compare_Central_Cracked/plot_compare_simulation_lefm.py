@@ -1,9 +1,27 @@
 r"""
 .. _ref_compare_pff_lefm:
 
-Compare simulation with LEFM
-----------------------------
+Validation against LEFM — single simulation (AT2, sim 8)
+---------------------------------------------------------
 
+This script compares the three correction approaches against the analytical Linear Elastic
+Fracture Mechanics (LEFM) solution for the central cracked specimen. It uses
+:ref:`ref_cc_sim8` (:math:`l = 0.000625` mm, :math:`h = 0.00015625` mm, :math:`l/h = 4.0`),
+the finest AT2 simulation, which minimizes strain localization error and provides the closest
+phase-field representation of the sharp-crack limit.
+
+The LEFM reference provides the exact structural compliance
+:math:`C(a) = 2a\,F(a/W)/(Eh)`, from which the stiffness and force are derived analytically.
+
+**Plots generated**
+
+- Correction factor :math:`\mathcal{F}` vs. crack length :math:`\Gamma` for the three methods.
+- Force vs. displacement curves (with inset zoom on the peak-force region).
+- Structural stiffness :math:`K = P/u` vs. crack length :math:`\Gamma` (with inset zoom).
+
+**Simulations used**
+
+- :ref:`ref_cc_sim8` — AT2, :math:`l = 0.000625` mm, :math:`l/h = 4.0`
 """
 
 ###############################################################################

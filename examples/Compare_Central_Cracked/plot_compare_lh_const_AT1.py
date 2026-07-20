@@ -1,9 +1,34 @@
 r"""
 .. _ref_compare_lenght_scale_at1:
 
-Compare length scale AT1
-------------------------
+Effect of length scale at constant :math:`l/h` ratio (AT1)
+-----------------------------------------------------------
 
+This script is the AT1 counterpart of :ref:`ref_compare_lenght_scale`. It compares the DGCM
+correction factor and structural stiffness across the three AT1 convergence simulations
+(see :ref:`ref_examples_phase_field_central_crack_at1`). The length scale :math:`l` is reduced
+while keeping :math:`l/h = 2.5` fixed.
+
+For the AT1 model the Bourdin correction factor reads
+:math:`1 + h/(c_0 l)` with :math:`c_0 = 8/3`, so the horizontal reference line differs
+from the AT2 case.
+
+**Plots generated**
+
+- DGCM correction factor :math:`\mathcal{F}` vs. crack length :math:`\Gamma` for the three AT1 simulations.
+- Structural stiffness :math:`K` vs. applied force :math:`P`, compared against the LEFM reference.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack_at1`)
+
++-------------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| #                       | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
++=========================+================+================+===============================+==========================+=============+
+| :ref:`ref_cc_sim1_at1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
++-------------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim2_at1`  | 0.2            | 0.2            | 0.002500                      | 0.001000                 | 2.5         |
++-------------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim3_at1`  | 0.1            | 0.1            | 0.001250                      | 0.000500                 | 2.5         |
++-------------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 """
 
 ###############################################################################

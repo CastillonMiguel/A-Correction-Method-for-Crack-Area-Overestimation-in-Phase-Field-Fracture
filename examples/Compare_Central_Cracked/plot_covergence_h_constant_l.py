@@ -1,29 +1,41 @@
 r"""
 .. _ref_compare_lh_constant_length_scale:
 
-Influence of the mesh size for constant length scale l/h
---------------------------------------------------------
+Effect of mesh refinement at fixed :math:`l = 0.0025` mm (Study 2, AT2)
+------------------------------------------------------------------------
 
-In this file the effect of the mesh size is studied for a constant length scale l.
-So for all simulation under analisys a minimun relation of $l/h=2.5$ is kept, by this way avoinding the
-effect finite element error related to the profile captured.
+This script studies how the three correction methods respond to changes in mesh density
+for a **fixed** length scale :math:`l = 0.0025` mm (Study 2 of
+:ref:`ref_examples_phase_field_central_crack`). The :math:`l/h` ratio is varied from 2.5 to 6.0
+by reducing :math:`h`, and results are plotted as a function of :math:`h/l` (mesh coarseness).
 
-So here the following simulations that considered a lenght scale $l=0.0025$mm are compared:
+As :math:`h/l \to 0` the strain localization error vanishes and all correction methods should
+converge. The Bourdin factor is proportional to :math:`h/l` and thus decreases linearly;
+the DGCM factor adapts dynamically and is expected to converge more robustly.
 
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| #                   | $\alpha$       | $\theta$       | Length scale $l$ (mm)         | Mesh size $h$ (mm)       | $l/h$       |
-+=====================+================+================+===============================+==========================+=============+
-| :ref:`ref_cc_sim2`  | 0.2            | 0.2            | 0.002500                      | 0.001000                 | 2.5         |
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| :ref:`ref_cc_sim9`  | 0.2            | 0.1666         | 0.002500                      | 0.000833                 | 3.0         |
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| :ref:`ref_cc_sim6`  | 0.2            | 0.125          | 0.002500                      | 0.000625                 | 4.0         |
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| :ref:`ref_cc_sim10` | 0.2            | 0.1            | 0.002500                      | 0.000500                 | 5.0         |
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| :ref:`ref_cc_sim11` | 0.2            | 0.0833         | 0.002500                      | 0.0004166                | 6.0         |
-+---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+**Plots generated**
 
+- Peak force :math:`P_{\max}` (normalized by LEFM) vs. :math:`h/l` for all three methods.
+- Correction factor :math:`\mathcal{F}` at :math:`\Gamma = 0.9` mm vs. :math:`h/l`.
+- Crack length :math:`\Gamma` at stiffness threshold 38.53 kN/mm (normalized) vs. :math:`h/l`.
+
+**Requires** ``results_convergence_data/`` files produced by :ref:`ref_compare_save_data`.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack`, Study 2)
+
++---------------------+---------------------------+---------------------------+-------------+
+| Simulation          | Length scale :math:`l` (mm)| Mesh size :math:`h` (mm)  | :math:`l/h` |
++=====================+===========================+===========================+=============+
+| :ref:`ref_cc_sim2`  | 0.002500                  | 0.001000                  | 2.5         |
++---------------------+---------------------------+---------------------------+-------------+
+| :ref:`ref_cc_sim9`  | 0.002500                  | 0.000833                  | 3.0         |
++---------------------+---------------------------+---------------------------+-------------+
+| :ref:`ref_cc_sim6`  | 0.002500                  | 0.000625                  | 4.0         |
++---------------------+---------------------------+---------------------------+-------------+
+| :ref:`ref_cc_sim10` | 0.002500                  | 0.000500                  | 5.0         |
++---------------------+---------------------------+---------------------------+-------------+
+| :ref:`ref_cc_sim11` | 0.002500                  | 0.0004166                 | 6.0         |
++---------------------+---------------------------+---------------------------+-------------+
 """
 
 ###############################################################################

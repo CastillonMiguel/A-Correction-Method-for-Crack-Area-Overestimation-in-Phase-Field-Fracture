@@ -1,8 +1,38 @@
 r"""
 .. _ref_compare_lenght_scale:
 
-Compare length scale AT2
-------------------------
+Effect of length scale at constant :math:`l/h` ratio (AT2)
+-----------------------------------------------------------
+
+This script compares the DGCM correction factor and structural stiffness across the AT2
+convergence simulations (Study 1 of :ref:`ref_examples_phase_field_central_crack`). The
+length scale :math:`l` is reduced while keeping the ratio :math:`l/h` fixed at 2.5.
+This isolates the effect of :math:`l \to 0` from the mesh-refinement effect, allowing a
+clear assessment of how each correction method converges to the analytical LEFM stiffness.
+
+A horizontal Bourdin reference line at :math:`1 + 1/(l/h)` is drawn to indicate the
+constant correction factor predicted by that method for a given :math:`l/h` ratio.
+
+**Plots generated**
+
+- DGCM correction factor :math:`\mathcal{F}` vs. crack length :math:`\Gamma`, grouped by :math:`l/h` ratio.
+- Structural stiffness :math:`K` vs. applied force :math:`P`, compared against the LEFM reference.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack`)
+
+*Group A —* :math:`l/h = 2.5`:
+
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
++=====================+================+================+===============================+==========================+=============+
+| :ref:`ref_cc_sim1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim2`  | 0.2            | 0.2            | 0.002500                      | 0.001000                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim3`  | 0.1            | 0.1            | 0.001250                      | 0.000500                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim4`  | 0.05           | 0.05           | 0.000625                      | 0.000250                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 
 """
 
@@ -95,32 +125,6 @@ markevery_1 = max(1, len(simulation_1["ref"]["displacement"])//20) if simulation
 markevery_2 = max(1, len(simulation_2["ref"]["displacement"])//20) if simulation_2["ref"] is not None else 1
 markevery_3 = max(1, len(simulation_3["ref"]["displacement"])//20) if simulation_3["ref"] is not None else 1
 markevery_4 = max(1, len(simulation_4["ref"]["displacement"])//20) if simulation_4["ref"] is not None else 1
-
-
-# l/h = 4.0 simulations
-alpha_lh_40 = alpha_lh_25
-beta_lh_40  = np.array([0.625, 0.125, 0.0625, 0.03125])
-
-simulation_5 = load_simulation_data(path_list[4])
-simulation_6 = load_simulation_data(path_list[5])
-simulation_7 = load_simulation_data(path_list[6])
-simulation_8 = load_simulation_data(path_list[7])
-
-label_lh_5 = r"$l/h=0.0125/0.003125$"
-label_lh_6 = r"$l/h=0.0025/0.000625$"
-label_lh_7 = r"$l/h=0.00125/0.0003125$"
-label_lh_8 = r"$l/h=0.000625/0.00015625$"
-
-color_5, linestyle_5, marker_5 = pcfg.color_red, '--', 'v'
-color_6, linestyle_6, marker_6 = pcfg.color_green, '-.', 'x'
-color_7, linestyle_7, marker_7 = pcfg.color_purple, ':', '*'
-color_8, linestyle_8, marker_8 = pcfg.color_red, '-', 'p'
-
-markevery_5 = max(1, len(simulation_5["ref"]["displacement"])//20) if simulation_5["ref"] is not None else 1
-markevery_6 = max(1, len(simulation_6["ref"]["displacement"])//20) if simulation_6["ref"] is not None else 1
-markevery_7 = max(1, len(simulation_7["ref"]["displacement"])//20) if simulation_7["ref"] is not None else 1
-markevery_8 = max(1, len(simulation_8["ref"]["displacement"])//20) if simulation_8["ref"] is not None else 1
-
 
 
 # %%

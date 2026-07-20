@@ -1,15 +1,25 @@
 r"""
 .. _ref_convergence_l_constant_lh_2_5:
 
-Influence of the lenght scale parameter for constants l/h
----------------------------------------------------------
+Convergence of the correction factor vs. :math:`l` at :math:`l/h = 2.5` (AT2)
+-------------------------------------------------------------------------------
 
-In this file the effect of the length scale parameter is studied for a constant ratio $l/h$.
-So for all simulation under analisys a minimun relation of $l/h=2.5$ is kept, by this way avoinding the
-effect finite element error related to the profile captured.
+This script produces a log–log convergence plot showing how the DGCM correction factor
+:math:`\mathcal{F}`, evaluated at three different crack lengths
+(:math:`\Gamma = 0.55`, :math:`0.75`, and :math:`0.90` mm), decreases with :math:`l` for the
+:math:`l/h = 2.5` group. The Bourdin factor (which is constant for a fixed :math:`l/h` ratio)
+is overlaid as a dashed reference line.
+
+As :math:`l \to 0` the strain localization error grows proportionally to :math:`h/l = 1/2.5`,
+so the uncorrected overestimation is constant across this group. The DGCM factor is expected to
+approach 1 (no overestimation) as the crack profile is better resolved.
+
+**Requires** ``results_convergence_data/`` files produced by :ref:`ref_compare_save_data`.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack`, Study 1 Group A)
 
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-| #                   | $\alpha$       | $\theta$       | Length scale $l$ (mm)         | Mesh size $h$ (mm)       | $l/h$       |
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
 +=====================+================+================+===============================+==========================+=============+
 | :ref:`ref_cc_sim1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
@@ -19,7 +29,6 @@ effect finite element error related to the profile captured.
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
 | :ref:`ref_cc_sim4`  | 0.05           | 0.05           | 0.000625                      | 0.000250                 | 2.5         |
 +---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
-
 """
 
 ###############################################################################
