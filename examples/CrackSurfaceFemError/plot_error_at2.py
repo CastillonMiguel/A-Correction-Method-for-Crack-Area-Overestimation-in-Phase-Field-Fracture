@@ -1,8 +1,25 @@
 r"""
-.. _ref_NumericalCrackSurface_plot_convergence_at2:
+.. _ref_CrackSurfaceFemError_plot_convergence_at2:
 
-Convergence: at2
-----------------
+FEM Discretization Error in the Crack Surface Density Functional: AT2
+----------------------------------------------------------------------
+
+This script evaluates the finite element discretization error in the crack
+surface density functional for the AT2 regularization model.
+
+The one-dimensional bar is solved on the half-domain :math:`[0, a]` with a
+Dirichlet condition :math:`\phi=1` at the symmetry plane :math:`x=0`
+(representing the crack) and a zero-flux condition at :math:`x=a`. Linear
+Lagrange elements are used for the phase-field approximation.
+
+With :math:`l=0.1`\ mm and :math:`a=1.0`\ mm (:math:`a/l=10`), boundary
+effects are negligible and the reference values are :math:`\Gamma=1.0`,
+:math:`\Gamma_\phi=\Gamma_{\nabla\phi}=0.5`. Mesh divisions from 1 to 99
+elements are tested, sweeping :math:`l/h` from ~0.1 to ~10. The relative
+error in each energy component is plotted on a log-log scale. The gradient
+energy :math:`\Gamma_{\nabla\phi}` is consistently more accurate than the
+phase-field energy :math:`\Gamma_\phi`; at :math:`l/h \approx 2`, the total
+energy error is approximately :math:`1\%`.
 
 """
 
@@ -28,21 +45,18 @@ from phasefieldx.Boundary.boundary_conditions import bc_phi, get_ds_bound_from_m
 ###############################################################################
 # Parameters definition
 # ---------------------
-# First, we define an input class, which contains all the parameters needed for the setup 
-# and results of the simulation.
+# An input object is created with the simulation parameters.
 #
-# The first term, $l$, specifies the length scale parameter for the problem, with $l = 4.0$.
+# - `l`: Length scale parameter, set to :math:`l = 0.1`\ mm. With
+#   :math:`a = 1.0`\ mm this gives a ratio :math:`a/l = 10`, so boundary
+#   effects are negligible and the theoretical reference values
+#   :math:`\Gamma=1.0`, :math:`\Gamma_\phi=\Gamma_{\nabla\phi}=0.5` apply.
 #
-# The next two options, `save_solution_xdmf` and `save_solution_vtu`, determine the file format 
-# used to save the phase-field results (.xdmf or .vtu), which can then be visualized using 
-# tools like ParaView or pvista. Both parameters are boolean values (`True` or `False`). 
-# In this case, we set `save_solution_vtu=True` to save the phase-field results in .vtu format.
+# - `save_solution_vtu`: Saves the phase-field result in VTU format for
+#   optional visualization in ParaView or PyVista.
 #
-# Lastly, `results_folder_name` specifies the name of the folder where all results 
-# and log information will be saved. If the folder does not exist, `phasefieldx` will create it. 
-# However, if the folder already exists, any previous data in it will be removed, and a new 
-# empty folder will be created in its place.
-#
+# - `results_folder_name`: Folder where results and logs are stored.
+#   If the folder already exists, it is replaced with a fresh empty one.
 
 
 def run_simulations(i, div, l, a, combo_folder_name, element_degree):
@@ -249,8 +263,8 @@ import plot_config as pcfg
 h = a/div
 
 ###############################################################################
-# Figure: l/a vs. Phase-field energies
-# ------------------------------------
+# Figure: l/h vs. relative error in energy components
+# ----------------------------------------------------
 l_div_h = l/h
 markevery_gamma = max(1, len(h)//10)
 markevery_gamma_phi = max(1, len(h)//10)

@@ -1,20 +1,26 @@
 r"""
+.. _ref_CrackSurfaceOverestimation_plot_profiles:
 
-.. _ref_TheoryPhaseField_plot_profiles:
+Phase-Field Profiles for a 1D Bar with Strain Localization (AT1/AT2)
+--------------------------------------------------------------------
 
-Phase-Field Profiles for a 1D Bar (AT2/AT2)
--------------------------------------------
+This script computes and plots the analytical phase-field profiles for a crack
+centered at :math:`x = 0` in a one-dimensional bar, illustrating the effect of
+strain localization for both the AT1 and AT2 regularization models.
 
-This script calculates and plots theoretical phase-field profiles for a crack
-in a one-dimensional bar. The crack is centered at x=0 within a domain of [-a, a].
+Strain localization is a numerical artifact in which the phase-field variable
+artificially saturates at :math:`\phi = 1` across an entire finite element of
+size :math:`h` centered at the crack location. Outside this localized element,
+the analytical profile is recovered but shifted outward by :math:`h`.
 
-The profiles represent the analytical solutions to the ordinary differential
-equations (ODEs) that govern the phase-field variable for different models (AT1, AT2, and Wu).
-The script demonstrates how varying the length-scale parameter `l` affects the
-solution, including boundary effects.
+The script generates two figures:
 
-When the length-scale parameter is small relative to the domain size, the
-phase-field solution approximates the sharp crack profile.
+* The phase-field profile :math:`\phi(x)`, showing how :math:`\phi = 1` is
+  maintained over the localized element :math:`[-h/2, h/2]` and transitions smoothly
+  to the analytical solution outside it.
+* The gradient :math:`\phi'(x)`, illustrating that the gradient vanishes within
+  the localized element (where :math:`\phi` is constant) and recovers the
+  analytical shape beyond it.
 
 """
 
@@ -119,9 +125,9 @@ a = 1.0
 x = np.linspace(-a, a, 10000)
 x_left = np.linspace(-a, 0.0, 10000)
 x_right = np.linspace(0.0, a, 10000)
-h = 0.1
-left_mask = x <= -h
-right_mask = x >= h
+hdiv2 = 0.1
+left_mask = x <= -hdiv2
+right_mask = x >= hdiv2
 
 l = 0.1*a
 l1 = 0.1*a
@@ -167,13 +173,13 @@ label_at1_l1 = l1_label
 # AT2 Phase Field Profile
 fig, ax_at2_phi = plt.subplots()
 
-ax_at2_phi.plot(x_left-h, phi_at1_profile_l1_left, color=color_1, linestyle='-', label=label_1, markevery=markevery_1)
-ax_at2_phi.plot(x_right+h, phi_at1_profile_l1_right, color=color_1, linestyle='-', markevery=markevery_1)
-ax_at2_phi.hlines(1.0, -h, h, colors=color_1, linestyles='-')
+ax_at2_phi.plot(x_left-hdiv2, phi_at1_profile_l1_left, color=color_1, linestyle='-', label=label_1, markevery=markevery_1)
+ax_at2_phi.plot(x_right+hdiv2, phi_at1_profile_l1_right, color=color_1, linestyle='-', markevery=markevery_1)
+ax_at2_phi.hlines(1.0, -hdiv2, hdiv2, colors=color_1, linestyles='-')
 
-ax_at2_phi.plot(x_left-h, phi_at2_profile_l1_left, color=color_2, linestyle='--', label=label_2, markevery=markevery_2)
-ax_at2_phi.plot(x_right+h, phi_at2_profile_l1_right, color=color_2, linestyle='--', markevery=markevery_2)
-ax_at2_phi.hlines(1.0, -h, h, colors=color_2, linestyles='--')
+ax_at2_phi.plot(x_left-hdiv2, phi_at2_profile_l1_left, color=color_2, linestyle='--', label=label_2, markevery=markevery_2)
+ax_at2_phi.plot(x_right+hdiv2, phi_at2_profile_l1_right, color=color_2, linestyle='--', markevery=markevery_2)
+ax_at2_phi.hlines(1.0, -hdiv2, hdiv2, colors=color_2, linestyles='--')
 
 ax_at2_phi.set_xlabel(r"$x/a$")
 ax_at2_phi.set_ylabel(r"$\phi(x)$")
@@ -185,13 +191,13 @@ if save_figures:
 # AT2 Phase Field gradient Profile
 fig, ax_at2_gradphi = plt.subplots()
 
-ax_at2_gradphi.plot(x_left[:-1]-h, gradphi_at1_profile_l1_left[:-1], color=color_1, linestyle='-', label=label_1, markevery=markevery_1)
-ax_at2_gradphi.plot(x_right[1:]+h, gradphi_at1_profile_l1_right[1:], color=color_1, linestyle='-', markevery=markevery_1)
-ax_at2_gradphi.hlines(0.0, -h, h, colors=color_1, linestyles='-')
+ax_at2_gradphi.plot(x_left[:-1]-hdiv2, gradphi_at1_profile_l1_left[:-1], color=color_1, linestyle='-', label=label_1, markevery=markevery_1)
+ax_at2_gradphi.plot(x_right[1:]+hdiv2, gradphi_at1_profile_l1_right[1:], color=color_1, linestyle='-', markevery=markevery_1)
+ax_at2_gradphi.hlines(0.0, -hdiv2, hdiv2, colors=color_1, linestyles='-')
 
-ax_at2_gradphi.plot(x_left[:-1]-h, gradphi_at2_profile_l1_left[:-1], color=color_2, linestyle='--', label=label_2, markevery=markevery_2)
-ax_at2_gradphi.plot(x_right[1:]+h, gradphi_at2_profile_l1_right[1:], color=color_2, linestyle='--', markevery=markevery_2)
-ax_at2_gradphi.hlines(0.0, -h, h, colors=color_2, linestyles='--')
+ax_at2_gradphi.plot(x_left[:-1]-hdiv2, gradphi_at2_profile_l1_left[:-1], color=color_2, linestyle='--', label=label_2, markevery=markevery_2)
+ax_at2_gradphi.plot(x_right[1:]+hdiv2, gradphi_at2_profile_l1_right[1:], color=color_2, linestyle='--', markevery=markevery_2)
+ax_at2_gradphi.hlines(0.0, -hdiv2, hdiv2, colors=color_2, linestyles='--')
 
 ax_at2_gradphi.set_xlabel(r"$x/a$")
 ax_at2_gradphi.set_ylabel((r"$\phi'(x)$"))

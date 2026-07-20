@@ -3,4 +3,8 @@
 Theory: Crack Surface Density Functional
 ----------------------------------------
 
-This directory contains Python scripts to visualize the fundamental components of the crack surface density functional for the AT2/AT1 model. The scripts generate plots for the analytical solutions of a one-dimensional bar problem, illustrating the phase-field profile (:math:`\phi(x)`), its derivative (:math:`\phi'(x)`), and the energy of the bar. 
+This directory contains two Python scripts that visualize fundamental aspects of the crack surface density functional, based on the one-dimensional analytical solution.
+
+* **plot_profile.py:** Plots the phase-field profile (:math:`\phi(x)`) and its gradient (:math:`\phi'(x)`) for both the AT1 and AT2 regularization models.
+
+* **plot_energy.py:** Plots the total energy of the bar as a function of the length scale parameter for both the AT1 and AT2 regularization models.

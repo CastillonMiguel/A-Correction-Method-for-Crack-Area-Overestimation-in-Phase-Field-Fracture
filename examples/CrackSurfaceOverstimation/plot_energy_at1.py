@@ -1,11 +1,19 @@
 r"""
+.. _ref_CrackSurfaceOverestimation_plot_energy_at1:
 
-.. _ref_TheoryPhaseField_plot_energy_at1:
+Crack Surface Energy Overestimation for the AT1 Model (1D Bar)
+---------------------------------------------------------------
 
-Phase-field energies (1D bar) AT1
----------------------------------
+This script computes and plots the analytical energy contributions of the AT1
+crack surface density functional for a one-dimensional bar, illustrating the
+overestimation caused by strain localization.
 
-This script provides functions and plots for the analytical energy expressions of phase-field fracture models (AT1, AT2, Wu) for a 1D bar with a centered crack. The phase-field approach models cracks as smooth transitions, and the energy is split into phase, gradient, and total contributions.
+For the ideal case (no localization), the total energy is decomposed into the
+phase-field (potential) energy :math:`\Gamma_\phi` and the gradient energy
+:math:`\Gamma_{\nabla\phi}`. When strain localization is present, a localized
+element of size :math:`h` contributes an additional :math:`h/(c_0 l)` (with
+:math:`c_0 = 8/3` for AT1) to the phase-field energy, while the gradient energy
+remains unaffected.
 
 """
 
@@ -83,7 +91,7 @@ def gamma_gradphi_at1(length_scale, bar_half_length):
 
 def gamma_at1(length_scale, bar_half_length):
     """
-    Compute the total energy for the AT2 phase-field model.
+    Compute the total energy for the AT1 phase-field model.
 
     Parameters
     ----------
@@ -102,7 +110,11 @@ def gamma_at1(length_scale, bar_half_length):
 
 def gamma_at1_stl(length_scale, bar_half_length, h):
     """
-    Compute the total energy for the AT2 phase-field model.
+    Compute the total energy for the AT1 model with strain localization.
+
+    Strain localization adds an extra term h/(c0*l) with c0=8/3, as a finite
+    element of size h saturates at phi=1, increasing the phase-field energy
+    while leaving the gradient energy unchanged.
 
     Parameters
     ----------
@@ -110,11 +122,13 @@ def gamma_at1_stl(length_scale, bar_half_length, h):
         Length scale parameter(s).
     bar_half_length : float
         Half-length of the bar [-a, a].
+    h : float
+        Size of the strain-localized finite element.
 
     Returns
     -------
     ndarray
-        Total energy for the AT2 model.
+        Total crack surface energy for the AT1 model including strain localization.
     """
     # a_div_l = bar_half_length / length_scale
     # tanh_a_div_l = np.tanh(a_div_l) + h/(2*length_scale)
@@ -124,7 +138,10 @@ def gamma_at1_stl(length_scale, bar_half_length, h):
 
 def gamma_phi_at1_stl(length_scale, bar_half_length, h):
     """
-    Compute the phase-field energy contribution for the AT2 model.
+    Compute the phase-field energy for the AT1 model with strain localization.
+
+    The localized element contributes an additional h/(c0*l) with c0=8/3 to
+    the phase-field energy term; the gradient energy is unaffected.
 
     Parameters
     ----------
@@ -132,11 +149,13 @@ def gamma_phi_at1_stl(length_scale, bar_half_length, h):
         Length scale parameter(s).
     bar_half_length : float
         Half-length of the bar [-a, a].
+    h : float
+        Size of the strain-localized finite element.
 
     Returns
     -------
     ndarray
-        Phase-field energy for the AT2 model.
+        Phase-field energy for the AT1 model including strain localization.
     """
     a_div_l = bar_half_length / length_scale
     c0=8.0/3.0
@@ -145,7 +164,11 @@ def gamma_phi_at1_stl(length_scale, bar_half_length, h):
 
 def gamma_gradphi_at1_stl(length_scale, bar_half_length):
     """
-    Compute the gradient energy contribution for the AT2 model.
+    Compute the gradient energy for the AT1 model (strain-localization invariant).
+
+    The gradient energy is unaffected by strain localization: within the
+    localized element phi=1 is constant, so its gradient vanishes and
+    contributes nothing extra to this term.
 
     Parameters
     ----------
@@ -157,7 +180,7 @@ def gamma_gradphi_at1_stl(length_scale, bar_half_length):
     Returns
     -------
     ndarray
-        Gradient energy for the AT2 model.
+        Gradient energy for the AT1 model (identical to the theoretical value).
     """
     a_div_l = bar_half_length / length_scale
     tanh_a_div_l = np.tanh(a_div_l)
@@ -176,7 +199,7 @@ length_scale_div_a = length_scale / bar_half_length
 
 
 ###############################################################################
-# AT2 Phase-field model
+# AT1 Phase-field model
 # ---------------------
 label_2 = r"AT1"
 color_2 = pcfg.color_red if hasattr(pcfg, 'color_red') else 'red'
@@ -216,8 +239,8 @@ ax.legend()
 
 
 ###############################################################################
-# AT2 Phase-field model
-# ---------------------
+# AT1 Phase-field energy: convergence with mesh size h/a
+# -------------------------------------------------------
 label_2 = r"AT2"
 color_2 = pcfg.color_red if hasattr(pcfg, 'color_red') else 'red'
 markevery_2 = max(1, len(length_scale)//10)

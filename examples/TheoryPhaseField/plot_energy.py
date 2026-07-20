@@ -1,18 +1,21 @@
 r"""
 .. _ref_TheoryPhaseField_plot_energy:
 
-Phase-field energies (1D bar)
------------------------------
+Phase-Field Energies for a 1D Bar
+----------------------------------
 
-This script computes and plots analytical expressions for the phase-field crack
-surface density functional (AT2/AT1) for a one-dimensional bar with a centered
-crack. The phase-field method represents cracks as smooth transitions and
-splits the energy into three contributions: phase (potential) energy,
-gradient energy, and total energy.
+This script computes and plots the analytical energy contributions of the
+crack surface density functional for a one-dimensional bar with a crack
+centered at :math:`x = 0` in the domain :math:`[-a, a]`.
 
-The file provides functions that return closed-form energy contributions for
-the AT2/AT1 models and produces plots of each contribution as a function of the
-length-scale parameter.
+For both the AT1 and AT2 regularization models, the total energy is decomposed
+into two contributions:
+
+* **Phase-field energy:** associated with the term :math:`\alpha(\phi)`.
+* **Gradient energy:** associated with the gradient term :math:`|\nabla\phi|^2`.
+
+Closed-form expressions are used for both models, and each contribution
+is plotted as a function of the dimensionless length-scale ratio :math:`l/a`.
 """
 
 
@@ -51,6 +54,9 @@ a_div_l = 1/l_div_a
 ###############################################################################
 # AT2 Phase-field model
 # ---------------------
+# Closed-form energy contributions derived from the 1D analytical solution.
+# The phase-field and gradient energies sum to the total energy,
+# which approaches 1 (the reference crack surface value) as l/a -> 0.
 phi_at2_energy = 0.5 * np.tanh(a_div_l) + 0.5 * a_div_l * (1.0 - np.tanh(a_div_l)**2)
 gradphi_at2_energy = 0.5 * np.tanh(a_div_l) - 0.5 * a_div_l * (1.0 - np.tanh(a_div_l)**2)
 total_at2_energy = np.tanh(a_div_l)

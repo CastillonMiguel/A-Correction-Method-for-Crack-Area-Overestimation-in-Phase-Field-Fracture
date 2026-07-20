@@ -225,7 +225,7 @@ html_sidebars = {
     "**": ["sidebar-nav-bs", "sidebar-ethical-ads"],
     "index": [],
     "indications/index": [],
-    # "auto_examples/index": [],
+    "auto_examples/index": [],
     "references/index": [],
     "related/index": [],
 }

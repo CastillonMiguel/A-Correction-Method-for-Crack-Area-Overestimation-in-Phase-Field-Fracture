@@ -3,14 +3,19 @@ r"""
 
 Phase-Field Profiles for a 1D Bar
 ---------------------------------
-This script calculates and plots theoretical phase-field profiles for a crack
-in a one-dimensional bar. The crack is centered at x=0 within a domain of [-a, a].
+This script computes and plots the analytical phase-field profiles for a crack
+centered at :math:`x = 0` in a one-dimensional bar of half-length :math:`a`,
+i.e., the domain :math:`[-a, a]`.
 
-The profiles represent the analytical solutions to the ordinary differential
-equations (ODEs) that govern the phase-field variable.
-The script demonstrates how varying the length-scale parameter `l` affects the
-solution, including boundary effects.
+For both the AT1 and AT2 regularization models, the script generates two figures:
 
+* The phase-field profile :math:`\phi(x)` as a function of normalized position :math:`x/a`.
+* The gradient :math:`\phi'(x)` of the phase-field profile.
+
+Three values of the dimensionless ratio :math:`l/a` are compared in each figure
+to illustrate how the length-scale parameter controls the width of the
+transition zone and how boundary effects arise when :math:`l` is comparable
+to the bar half-length :math:`a`.
 """
 
 ###############################################################################
@@ -104,8 +109,6 @@ gradphi_at2_profile_l3 = gradphi_at2(x_div_a, l3, a)
 label_at2_l3 = l3_label
 
 
-
-
 ###############################################################################
 # Figure: x/a vs. Phase-field
 # ---------------------------
@@ -147,7 +150,6 @@ ax_at2_gradphi.set_ylabel(pcfg.gradphi_profile_1d)
 ax_at2_gradphi.legend()
 if save_figures:
     plt.savefig(os.path.join(results_folder, "at2_gradphi_profile_l1_l2_l3"))
-
 
 
 
@@ -206,7 +208,7 @@ l3_label = r"$l/a=1.2$"
 
 
 ###############################################################################
-# AT2 Phase-field model
+# AT1 Phase-field model
 # ---------------------
 color_2 = pcfg.color_red
 markevery_2 = max(1, len(x_div_a)//20)
@@ -222,8 +224,6 @@ label_at2_l2 = l2_label
 phi_at2_profile_l3 = phi_at1(x_div_a, l3, a)
 gradphi_at2_profile_l3 = gradphi_at1(x_div_a, l3, a)
 label_at2_l3 = l3_label
-
-
 
 
 ###############################################################################
@@ -254,7 +254,7 @@ fig, ax_at1_gradphi = plt.subplots()
 ax_at1_gradphi.plot(x_div_a[0:int(len(x_div_a)/2)], gradphi_at2_profile_l1[0:int(len(x_div_a)/2)], color=color_l1, linestyle='--', label=label_at2_l1, markevery=markevery_2, marker='o')
 ax_at1_gradphi.plot(x_div_a[1+int(len(x_div_a)/2):], gradphi_at2_profile_l1[1+int(len(x_div_a)/2):], color=color_l1, linestyle='--', markevery=markevery_2, marker='o')
 
-# l/a = 0.2
+# l/a = 0.5
 ax_at1_gradphi.plot(x_div_a[0:int(len(x_div_a)/2)], gradphi_at2_profile_l2[0:int(len(x_div_a)/2)], color=color_l2, linestyle='-.', label=label_at2_l2, markevery=markevery_2, marker='s')
 ax_at1_gradphi.plot(x_div_a[1+int(len(x_div_a)/2):], gradphi_at2_profile_l2[1+int(len(x_div_a)/2):], color=color_l2, linestyle='-.', markevery=markevery_2, marker='s')
 
@@ -267,8 +267,5 @@ ax_at1_gradphi.set_ylabel(pcfg.gradphi_profile_1d)
 ax_at1_gradphi.legend()
 if save_figures:
     plt.savefig(os.path.join(results_folder, "at1_gradphi_profile_l1_l2_l3"))
-
-plt.show()
-
 
 plt.show()
