@@ -5,25 +5,26 @@
     </style>
 
 
+.. .. line-break::
+
+.. rst-class:: font-weight-bold big-font
+
+        A Correction Method for Crack Area Overestimation in Phase-Field Fracture
+
+
 .. raw:: html
 
-    <div style="text-align: center; margin: 32px 0;">
-        <h1 style="color: var(--pst-color-primary); margin-bottom: 20px;">
-            A Correction Method for Crack Area Overestimation in Phase-Field Fracture
-        </h1>
-
+    <div style="text-align: center; margin: 24px 0;">
         <img src="_static/logo_name.png"
-             alt="Main Illustration"
-             style="box-shadow: 0 2px 12px rgba(0,0,0,0.08); max-width: 500px; width: 100%; height: auto;">
+             alt="Logo"
+             style="max-width: 800px; width: 100%; height: auto;">
     </div>
 
-.. This repository provides all simulation files, scripts, and supplementary data referenced in the paper :footcite:t:`phase_field_crack_area_overestimation_Castillon2025`.
+Phase-field fracture models are known to overestimate the crack area, a discrepancy that affects the accuracy of fracture predictions. This issue stems from the diffuse crack representation and numerical artifacts, such as strain localization, where the phase-field variable artificially saturates across finite elements.
 
-Phase-field fracture models are known to overestimate crack area, a discrepancy that compromises the accuracy of fracture predictions. This issue stems from the diffuse crack representation and numerical artifacts, such as strain localization, where the phase-field variable artificially saturates across finite elements.
+Existing correction strategies, including mesh-dependent factors and skeletonization algorithms, have limitations. Mesh-based corrections are often unreliable for unstructured meshes, while skeletonization can be complex and inaccurate for intricate crack topologies, especially in three dimensions.
 
-Existing correction strategies, including mesh-dependent factors and skeletonization algorithms, have significant limitations. Mesh-based corrections are often unreliable for unstructured meshes, while skeletonization can be complex and inaccurate for intricate crack topologies, especially in three dimensions.
-
-This paper introduces a novel and robust framework to correct this overestimation. Our approach is founded on an energy equipartition result observed in the one-dimensional analytical solution of the phase-field model. In this case, the energy contributions from the phase-field and its gradient are equal when the length scale parameter goes to zero. Since numerical artifacts primarily affect the phase-field term while leaving its gradient largely unperturbed, we propose that the crack area can be accurately approximated as twice the gradient-dependent energy. This method is inherently mesh-independent and readily applicable to the entire domain, including 3D simulations.
+This paper introduces a correction framework to address this overestimation. Our approach is founded on the principle of energy equipartition, where the energy contributions from the phase-field and its gradient are equal as the length-scale parameter approaches zero. Since numerical artifacts primarily affect the phase-field term while leaving the gradient term largely unperturbed, we propose that the crack area can be approximated as twice the gradient-dependent energy. This method is inherently mesh-independent and readily applicable to the entire domain, including 3D simulations.
 
 The proposed methodology is validated against benchmarks with analytical solutions and compared with established methods like skeletonization to demonstrate its accuracy. It is then applied to complex geometries with curvilinear crack paths and evaluated in a three-dimensional simulation.
 
@@ -37,18 +38,18 @@ The proposed methodology is validated against benchmarks with analytical solutio
     - **Robust and Versatile**: The method shows less sensitivity to mesh resolution compared to other corrections and is adaptable to various phase-field models (e.g., AT1 and AT2).
     - **Computationally Efficient**: The correction adds no significant computational cost, as it relies on energy quantities already computed during the simulation.
 
-    This repository is designed to ensure complete reproducibility of the results by providing all simulation data, parameter sets, meshes, and detailed numerical configurations.
+This repository is designed to ensure complete reproducibility of the results by providing all simulation data, parameter sets, meshes, and detailed numerical configurations.
 
 .. code:: latex
 
-    @misc{castillon2025,
-        title={A Post-Processing Correction Method for Crack Area Overestimation in Phase-Field Fracture}, 
-        author={M. Castillón and I. Romero and J. Segurado},
-        year={},
-        eprint={},
+    @misc{castillon_dgcm2026,
+        title={A Correction Method for Crack Area Overestimation in Phase-Field Fracture}, 
+        author={M. Castillón and J. Segurado and I. Romero},
+        year={2026},
+        eprint={2605.03731},
         archivePrefix={arXiv},
-        primaryClass={},
-        url={}, 
+        primaryClass={cond-mat.mtrl-sci},
+        url={https://arxiv.org/abs/2605.03731}, 
     }
 
 All the files are provided in the following `GitHub Repository <https://github.com/CastillonMiguel/A-Correction-Method-for-Crack-Area-Overestimation-in-Phase-Field-Fracture>`_
@@ -70,5 +71,6 @@ The **PhaseFieldX** project is designed to simulate and analyze material behavio
 .. toctree::
 
    indications/index
+   auto_examples/index
    references/index.rst
    related/index.rst

@@ -1,18 +1,20 @@
 Indications
 ===========
 
-* **Phase-Field Simulations:** This component involves simulations using phase-field, energy-controlled schemes. The results are saved in files with the ``.pff`` extension for comparison with other methods. These files contain information such as forces, energies, crack area, and other relevant quantities at each simulation step.
+The simulation results and reference data are organized into two components:
+
+* **Phase-Field Fracture Results:** Simulation results saved in files with the ``.pff`` extension, containing quantities such as forces, energies, crack area, and other relevant data at each simulation step.
 
     Three different correction methods are applied to the phase-field results, generating separate ``.pff`` files for each method:
 
     * ``results.pff``: Uncorrected results (equivalent to a constant correction factor of 1).
-    * ``results_dgcm.pff``: Results using the Double Gradient Correction Method (DGCM).
-    * ``results_bourdin.pff``: Results using the Bourdin method.
-    * ``results_skeleton.pff``: Results using the Skeletonization method.
+    * ``results_corrected_gradient.pff``: Results using the Double Gradient Correction Method (DGCM).
+    * ``results_corrected_bourdin.pff``: Results using the Bourdin method.
+    * ``results_corrected_skeleton.pff``: Results using the Skeletonization method.
 
-* **Reference Data:** This component consists of additional data from articles or other references, saved in files with the ``.databib`` extension.
+* **Reference Data:** Additional data from articles or other references, saved in files with the ``.databib`` extension.
 
-For all simulations and calculations, the following unit system is considered:
+For all simulations and calculations, the following unit system is used:
 
 +-------------------------------------+---------------------------------------------+
 | **Quantity**                        | **Unit**                                    |
@@ -27,9 +29,9 @@ For all simulations and calculations, the following unit system is considered:
 +-------------------------------------+---------------------------------------------+
 | Young's modulus: $E$                | $kN/mm^2$                                   |
 +-------------------------------------+---------------------------------------------+
-| Poisson's ratio  $\nu$              | dimensionless                               |
+| Poisson's ratio: $\nu$              | dimensionless                               |
 +-------------------------------------+---------------------------------------------+
-| Energy release rate: $G$            | $kN/mm$                                     |
+| Critical energy release rate: $G_c$ | $kN/mm$                                     |
 +-------------------------------------+---------------------------------------------+
 | Crack length                        | $mm$                                        |
 +-------------------------------------+---------------------------------------------+

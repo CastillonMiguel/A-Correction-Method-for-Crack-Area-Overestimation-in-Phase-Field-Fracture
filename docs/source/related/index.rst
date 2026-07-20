@@ -122,7 +122,6 @@ Here, some scientific publications of the authors related to this work are prese
                 <h2 class="pub-title" style="font-size: 26px;">
                     A Phase-Field Approach to Fracture and Fatigue Analysis: Bridging Theory and Simulation
                 </h2>
-                <p class="pub-subtitle">(Preprint)</p>
             </div>
         
         ^^^
@@ -144,8 +143,8 @@ Here, some scientific publications of the authors related to this work are prese
 
         **Authors:** M. Castillón, I. Romero, J. Segurado  
         **Year:** 2025  
-        **arXiv ID:** 2509.08939  
-        **Primary Class:** cond-mat.mtrl-sci
+        **Journal:** International Journal of Fatigue  
+        **DOI:** `10.1016/j.ijfatigue.2025.109397 <https://doi.org/10.1016/j.ijfatigue.2025.109397>`_
         
         This article presents a novel, robust and efficient framework for fatigue crack-propagation that combines the principles of Linear Elastic Fracture Mechanics (LEFM) with phase-field fracture (PFF). Contrary to cycle-by-cycle PFF approaches, this work relies on a single simulation and uses standard crack propagation models such as Paris' law for the material response, simplifying its parametrization.
         The core of the methodology is the numerical evaluation of the derivative of a specimen's compliance with respect to the crack area. To retrieve this compliance the framework relies on a PFF-FEM simulation, controlled imposing a monotonic crack growth. This control of the loading process is done by a new crack-control scheme which allows to robustly trace the complete equilibrium path of a crack, capturing complex instabilities. The specimen's compliance obtained from the PFF simulation enables the integration of Paris' law to predict fatigue life.
@@ -157,13 +156,13 @@ Here, some scientific publications of the authors related to this work are prese
         .. raw:: html
 
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 15px 0;">
-                <a href="https://arxiv.org/abs/2509.08939" target="_blank" class="pub-button btn-arxiv">
-                    📄<br>arXiv Preprint
+                <a href="https://doi.org/10.1016/j.ijfatigue.2025.109397" target="_blank" class="pub-button btn-journal">
+                    📄<br>Journal Paper
                 </a>
-                <a href="https://github.com/CastillonMiguel/A-Phase-Field-Approach-to-Fracture-and-Fatigue-Analysis-Bridging-Theory-and-Simulation" target="_blank" class="pub-button btn-github">
+                <a href="https://github.com/CastillonMiguel/A-Phase-Field-Approach-to-Fatigue-Analysis-Bridging-Theory-and-Simulation" target="_blank" class="pub-button btn-github">
                     💻<br>GitHub Repo
                 </a>
-                <a href="https://phasefieldx.readthedocs.io/en/latest/index.html" target="_blank" class="pub-button btn-docs">
+                <a href="https://phasefieldfatigue.readthedocs.io" target="_blank" class="pub-button btn-docs">
                     📚<br>Documentation
                 </a>
             </div>

@@ -1,0 +1,193 @@
+r"""
+.. _ref_compare_lenght_scale:
+
+Effect of length scale at constant :math:`l/h` ratio (AT2)
+-----------------------------------------------------------
+
+This script compares the DGCM correction factor and structural stiffness across the AT2
+convergence simulations (Study 1 of :ref:`ref_examples_phase_field_central_crack`). The
+length scale :math:`l` is reduced while keeping the ratio :math:`l/h` fixed at 2.5.
+This isolates the effect of :math:`l \to 0` from the mesh-refinement effect, allowing a
+clear assessment of how each correction method converges to the analytical LEFM stiffness.
+
+A horizontal Bourdin reference line at :math:`1 + 1/(l/h)` is drawn to indicate the
+constant correction factor predicted by that method for a given :math:`l/h` ratio.
+
+**Plots generated**
+
+- DGCM correction factor :math:`\mathcal{F}` vs. crack length :math:`\Gamma`, grouped by :math:`l/h` ratio.
+- Structural stiffness :math:`K` vs. applied force :math:`P`, compared against the LEFM reference.
+
+**Simulations used** (from :ref:`ref_examples_phase_field_central_crack`)
+
+*Group A —* :math:`l/h = 2.5`:
+
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| #                   | :math:`\alpha` | :math:`\theta` | Length scale :math:`l` (mm)   | Mesh size :math:`h` (mm) | :math:`l/h` |
++=====================+================+================+===============================+==========================+=============+
+| :ref:`ref_cc_sim1`  | 1.0            | 1.0            | 0.012500                      | 0.005000                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim2`  | 0.2            | 0.2            | 0.002500                      | 0.001000                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim3`  | 0.1            | 0.1            | 0.001250                      | 0.000500                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+| :ref:`ref_cc_sim4`  | 0.05           | 0.05           | 0.000625                      | 0.000250                 | 2.5         |
++---------------------+----------------+----------------+-------------------------------+--------------------------+-------------+
+
+"""
+
+###############################################################################
+# Import necessary libraries
+# --------------------------
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import pyvista as pv
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../'))
+plt.style.use('../../graph.mplstyle') 
+import plot_config as pcfg
+
+results_folder = "results_compare_lenght_scale"
+if not os.path.exists(results_folder):
+    os.makedirs(results_folder)
+
+
+###############################################################################
+# Load results
+# ------------
+# Once the simulation finishes, the results are loaded from the results folder.
+# The AllResults class takes the folder path as an argument and stores all
+# the results, including logs, energy, convergence, and DOF files.
+# Note that it is possible to load results from other results folders to compare results.
+# It is also possible to define a custom label and color to automate plot labels.
+
+
+###############################################################################
+# Load simulation data
+# --------------------
+
+def load_simulation_data(path):
+    """Load all three types of results for a simulation path."""
+    try:
+        data = {
+            "ref": pd.read_csv(os.path.join(path, "results.pff"), delimiter="\t", comment="#", header=0),
+            "bourdin": pd.read_csv(os.path.join(path, "results_corrected_bourdin.pff"), delimiter="\t", comment="#", header=0),
+            "dgcm": pd.read_csv(os.path.join(path, "results_corrected_gradient.pff"), delimiter="\t", comment="#", header=0)
+        }
+        return data
+    except Exception as e:
+        print(f"Warning: Could not load data for {path}: {e}")
+        return {"ref": None, "bourdin": None, "dgcm": None}
+
+# Define paths and load data
+# Common base path for all simulation results
+base_results_path = "../Central_cracked_all_at2"
+
+# NOTE: All paths start with ../central_cracked_all_at2
+# Define only the final part of each path, then prepend base_results_path to all
+path_list_final = [
+    "results_cc_sim_1",
+    "results_cc_sim_2",
+    "results_cc_sim_3",
+    "results_cc_sim_4",
+    "results_cc_sim_5",
+    "results_cc_sim_6",
+    "results_cc_sim_7",
+    "results_cc_sim_8",
+]
+path_list = [f"{base_results_path}/{final}" for final in path_list_final]
+
+
+# l/h = 2.5 simulations
+alpha_lh_25 = np.array([1.0, 0.2, 0.1, 0.05])
+beta_lh_25  = np.array([1.0, 0.2, 0.1, 0.05])
+
+simulation_1 = load_simulation_data(path_list[0])
+simulation_2 = load_simulation_data(path_list[1])
+simulation_3 = load_simulation_data(path_list[2])
+simulation_4 = load_simulation_data(path_list[3])
+
+label_lh_1 = r"$l=0.0125$"
+label_lh_2 = r"$l=0.0025$"
+label_lh_3 = r"$l=0.00125$"
+label_lh_4 = r"$l=0.000625$"
+
+color_1, linestyle_1, marker_1 = pcfg.color_blue, '-', 'o'
+color_2, linestyle_2, marker_2 = pcfg.color_orangered, '--', 's'
+color_3, linestyle_3, marker_3 = pcfg.color_gold, '--', '^'
+color_4, linestyle_4, marker_4 = pcfg.color_black, '--', 'd'
+
+markevery_1 = max(1, len(simulation_1["ref"]["displacement"])//20) if simulation_1["ref"] is not None else 1
+markevery_2 = max(1, len(simulation_2["ref"]["displacement"])//20) if simulation_2["ref"] is not None else 1
+markevery_3 = max(1, len(simulation_3["ref"]["displacement"])//20) if simulation_3["ref"] is not None else 1
+markevery_4 = max(1, len(simulation_4["ref"]["displacement"])//20) if simulation_4["ref"] is not None else 1
+
+
+# %%
+# From Linear elastic fracture mechanics theory
+lefm_solution = np.loadtxt("../Papers_Data/A_Phase_Field_Approach_to_Fatigue/results_central_cracked/center_cracked.lefm", delimiter="\t", skiprows=1)
+a_lefm = lefm_solution[:,0]
+k_lefm = 1/lefm_solution[:,2]
+c_lefm = lefm_solution[:,2]
+dcda_lefm = lefm_solution[:,3]
+color_lefm = pcfg.color_black
+
+results_lefm =  pd.read_csv("../Papers_Data/A_Phase_Field_Approach_to_Fatigue/results_central_cracked/a0_05.lefm_problem", delimiter="\t", comment="#", header=0)
+
+LABEL_LEFM = r"LEFM"
+color_var = pcfg.color_black
+linestyle_LEFM = '-'
+
+label_reference = r"Reference"
+label_bourdin = r"Bourdin"
+label_dgcm = r"DGCM"
+
+
+
+###############################################################################
+# Plot: Gamma vs Correction Factor
+# --------------------------------
+fig, ax_l1_uf = plt.subplots()
+
+ax_l1_uf.axhline(y=1+1/2.5, color=color_lefm, linestyle='-', label="Bourdin")
+
+ax_l1_uf.plot(simulation_1["dgcm"]["gamma"], simulation_1["dgcm"]["Ofactor"], color=color_1, linestyle=linestyle_1, label=label_lh_1, markevery=markevery_1, marker=marker_1)
+ax_l1_uf.plot(simulation_2["dgcm"]["gamma"], simulation_2["dgcm"]["Ofactor"], color=color_2, linestyle=linestyle_2, label=label_lh_2, markevery=markevery_2, marker=marker_2)
+ax_l1_uf.plot(simulation_3["dgcm"]["gamma"], simulation_3["dgcm"]["Ofactor"], color=color_3, linestyle=linestyle_3, label=label_lh_3, markevery=markevery_3, marker=marker_3)
+ax_l1_uf.plot(simulation_4["dgcm"]["gamma"], simulation_4["dgcm"]["Ofactor"], color=color_4, linestyle=linestyle_4, label=label_lh_4, markevery=markevery_4, marker=marker_4)
+
+ax_l1_uf.set_xlabel(pcfg.gamma_label)
+ax_l1_uf.set_ylabel(pcfg.correction_factor)
+ax_l1_uf.legend()
+
+ax_l1_uf.set_ylim(1.35, 2.0)
+plt.savefig(os.path.join(results_folder, "compare_correction_factor_constant_l_h_2_5"))
+
+
+
+###############################################################################
+# Plot: Gamma vs Correction Factor
+# --------------------------------
+fig, ax_l1_uf = plt.subplots()
+
+
+ax_l1_uf.plot(results_lefm["P"], results_lefm["P"]/results_lefm["u"], color=color_lefm, linestyle=linestyle_LEFM, label=LABEL_LEFM)
+ax_l1_uf.plot(simulation_1["dgcm"]["force"], simulation_1["dgcm"]["stiffness"], color=color_1, linestyle=linestyle_1, label=label_lh_1, markevery=markevery_1, marker=marker_1)
+ax_l1_uf.plot(simulation_2["dgcm"]["force"], simulation_2["dgcm"]["stiffness"], color=color_2, linestyle=linestyle_2, label=label_lh_2, markevery=markevery_2, marker=marker_2)
+ax_l1_uf.plot(simulation_3["dgcm"]["force"], simulation_3["dgcm"]["stiffness"], color=color_3, linestyle=linestyle_3, label=label_lh_3, markevery=markevery_3, marker=marker_3)
+ax_l1_uf.plot(simulation_4["dgcm"]["force"], simulation_4["dgcm"]["stiffness"], color=color_4, linestyle=linestyle_4, label=label_lh_4, markevery=markevery_4, marker=marker_4)
+
+ax_l1_uf.set_xlabel(pcfg.force_label)
+ax_l1_uf.set_ylabel(pcfg.stiffness_label)
+ax_l1_uf.legend()
+
+
+ax_l1_uf.set_ylim(45, 70.0)
+
+plt.savefig(os.path.join(results_folder, "force_stiffness_constant_l_h_2_5"))
+
+plt.show()

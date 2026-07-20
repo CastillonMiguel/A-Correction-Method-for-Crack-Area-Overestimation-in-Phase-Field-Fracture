@@ -92,7 +92,7 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx_copybutton',
     'sphinx_math_dollar',
-    # 'sphinx_gallery.gen_gallery',
+    'sphinx_gallery.gen_gallery',
     'pyvista.ext.plot_directive',  #'matplotlib.sphinxext.plot_directive',
     "pyvista.ext.viewer_directive",
     "sphinx_design",
@@ -123,42 +123,42 @@ class ResetPyVista:
 
 reset_pyvista = ResetPyVista()
 
-# import warnings
-# warnings.filterwarnings("ignore", category=UserWarning, module="trame.app")
-# nbsphinx_execute = 'auto'
-# sphinx_gallery_conf = {
-#      'examples_dirs': '../../examples',   # path to your example scripts
-#      'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
-#     # 'image_scrapers': ("pyvista", "matplotlib"),
-#      #'filename_pattern': r'.*\.py',
-#      'filename_pattern': '/plot_',
-#      'ignore_pattern': r'__init__\.py',
-#      'ignore_pattern': r'main',
-#      # Remove sphinx configuration comments from code blocks
-#     "remove_config_comments": True,
-#     # Sort gallery example by file name instead of number of lines (default)
-#     "within_subsection_order": FileNameSortKey,
-#     "subsection_order": ExplicitOrder([
-#         '../../examples/TheoryPhaseField',
-#         '../../examples/CrackSurfaceOverstimation',
-#         '../../examples/CrackSurfaceFemError',
-#         '../../examples/Centrar_cracked_all',
-#         '../../examples/Centrar_cracked_3d',
-#         '../../examples/Phase_Field_Compact_Specimen',
-#         '../../examples/Compare_Central_Cracked',
-#         '../../examples/Compare_Compact_Specimen',
-#         '../../examples/GmshGeoFiles',
-#         '../../examples/Papers_Data',
-#     ]),
-#     # directory where function granular galleries are stored
-#     "backreferences_dir": None,
-#     # Modules for which function level galleries are created.  In
-#     "doc_module": "pyvista",
-#     "image_scrapers": (DynamicScraper(), "matplotlib"),
-#     "first_notebook_cell": "%matplotlib inline",
-#     "reset_modules": (reset_pyvista,),
-#     "reset_modules_order": "both",
-# }
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="trame.app")
+nbsphinx_execute = 'auto'
+sphinx_gallery_conf = {
+     'examples_dirs': '../../examples',   # path to your example scripts
+     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
+    # 'image_scrapers': ("pyvista", "matplotlib"),
+     #'filename_pattern': r'.*\.py',
+     'filename_pattern': '/plot_',
+     'ignore_pattern': r'__init__\.py',
+     'ignore_pattern': r'main',
+     # Remove sphinx configuration comments from code blocks
+    "remove_config_comments": True,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
+    "subsection_order": ExplicitOrder([
+        '../../examples/TheoryPhaseField',
+        '../../examples/CrackSurfaceOverstimation',
+        '../../examples/CrackSurfaceFemError',
+        '../../examples/Central_cracked_all_at2',
+        '../../examples/Central_cracked_all_at1',
+        '../../examples/Compare_Central_Cracked',
+        '../../examples/Central_cracked_3d',
+        '../../examples/Phase_Field_Compact_Specimen',
+        '../../examples/GmshGeoFiles',
+        '../../examples/Papers_Data',
+    ]),
+    # directory where function granular galleries are stored
+    "backreferences_dir": None,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "pyvista",
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "first_notebook_cell": "%matplotlib inline",
+    "reset_modules": (reset_pyvista,),
+    "reset_modules_order": "both",
+}
 
 import re
 
@@ -225,7 +225,7 @@ html_sidebars = {
     "**": ["sidebar-nav-bs", "sidebar-ethical-ads"],
     "index": [],
     "indications/index": [],
-    # "auto_examples/index": [],
+    "auto_examples/index": [],
     "references/index": [],
     "related/index": [],
 }
@@ -245,7 +245,7 @@ html_theme_options = {
     'icon_links': [
         {
             'name': 'The Paper',
-            'url': 'https://arxiv.org/abs/2509.08939',
+            'url': 'https://arxiv.org/abs/2605.03731',
             'icon': 'fa fa-file-text fa-fw',
         },
     ],
