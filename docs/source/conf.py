@@ -245,7 +245,7 @@ html_theme_options = {
     'icon_links': [
         {
             'name': 'The Paper',
-            'url': 'https://arxiv.org/abs/2605.03731',
+            'url': 'https://link.springer.com/article/10.1007/s00466-026-02834-2',
             'icon': 'fa fa-file-text fa-fw',
         },
     ],

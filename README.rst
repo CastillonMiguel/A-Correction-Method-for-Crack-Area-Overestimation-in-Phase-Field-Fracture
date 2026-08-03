@@ -11,7 +11,7 @@ A Correction Method for Crack Area Overestimation in Phase-Field Fracture
 
 Repository code
 ---------------
-The code in this repository is the same version used for the paper `https://arxiv.org/abs/2605.03731 <https://arxiv.org/abs/2605.03731>`_. For a more visual and faster experience we recommend using the generated documentation, which provides interactive views and graphs: `Documentation and interactive views <https://doublegradientcorrectionmethod.readthedocs.io/en/latest/>`_.
+The code in this repository is the same version used for the paper `https://link.springer.com/article/10.1007/s00466-026-02834-2 <https://link.springer.com/article/10.1007/s00466-026-02834-2>`_. For a more visual and faster experience we recommend using the generated documentation, which provides interactive views and graphs: `Documentation and interactive views <https://doublegradientcorrectionmethod.readthedocs.io/en/latest/>`_.
 
 Overview
 --------
@@ -34,14 +34,14 @@ This repository is designed to ensure complete reproducibility of the results by
 
 .. code:: latex
 
-    @misc{castillon_dgcm2026,
-        title={A Correction Method for Crack Area Overestimation in Phase-Field Fracture}, 
-        author={M. Castillón and J. Segurado and I. Romero},
-        year={2026},
-        eprint={2605.03731},
-        archivePrefix={arXiv},
-        primaryClass={cond-mat.mtrl-sci},
-        url={https://arxiv.org/abs/2605.03731}, 
+    @article{castillon_dgcm2026,
+        title   = {A correction method for crack area overestimation in phase-field fracture},
+        journal = {Computational Mechanics},
+        author  = {M. Castillón and J. Segurado and I. Romero},
+        year    = {2026},
+        issn    = {1432-0924},
+        doi     = {10.1007/s00466-026-02834-2},
+        url     = {https://doi.org/10.1007/s00466-026-02834-2},
     }
 
 PhaseFieldX
