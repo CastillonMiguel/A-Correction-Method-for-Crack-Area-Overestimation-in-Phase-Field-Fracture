@@ -54,6 +54,19 @@ This repository is designed to ensure complete reproducibility of the results by
 
 All the files are provided in the following `GitHub Repository <https://github.com/CastillonMiguel/A-Correction-Method-for-Crack-Area-Overestimation-in-Phase-Field-Fracture>`_
 
+.. warning::
+
+   The simulations, examples, and results presented in this paper and the
+   associated repository should be reproduced using **PhaseFieldX v0.3.1**,
+   corresponding to the archived release available at
+   `https://zenodo.org/records/21431366 <https://zenodo.org/records/21431366>`_.
+
+   Although the manuscript refers to **PhaseFieldX v0.2.0**, this is due to an
+   oversight during the final manuscript update. At the time of submission and
+   generation of the reported results, the corresponding implementation was
+   already based on **PhaseFieldX v0.3.1**.
+
+
 Since the simulations were conducted using the open-source **PhaseFieldX** :footcite:t:`code_phasefieldx` library, the implementation details of the models can be found in the **PhaseFieldX** documentation and source code.
 
 - GitHub Repository: `https://github.com/CastillonMiguel/phasefieldx <https://github.com/CastillonMiguel/phasefieldx>`_

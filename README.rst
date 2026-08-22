@@ -13,6 +13,18 @@ Repository code
 ---------------
 The code in this repository is the same version used for the paper `https://link.springer.com/article/10.1007/s00466-026-02834-2 <https://link.springer.com/article/10.1007/s00466-026-02834-2>`_. For a more visual and faster experience we recommend using the generated documentation, which provides interactive views and graphs: `Documentation and interactive views <https://doublegradientcorrectionmethod.readthedocs.io/en/latest/>`_.
 
+.. highlights::
+
+   The simulations, examples, and results presented in this paper and the
+   associated repository should be reproduced using **PhaseFieldX v0.3.1**,
+   corresponding to the archived release available at
+   `https://zenodo.org/records/21431366 <https://zenodo.org/records/21431366>`_.
+
+   Although the manuscript refers to **PhaseFieldX v0.2.0**, this is due to an
+   oversight during the final manuscript update. At the time of submission and
+   generation of the reported results, the corresponding implementation was
+   already based on **PhaseFieldX v0.3.1**.
+
 Overview
 --------
 Phase-field fracture models are known to overestimate the crack area, a discrepancy that affects the accuracy of fracture predictions. This issue stems from the diffuse crack representation and numerical artifacts, such as strain localization, where the phase-field variable artificially saturates across finite elements.
