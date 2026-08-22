@@ -13,7 +13,7 @@ Repository code
 ---------------
 The code in this repository is the same version used for the paper `https://link.springer.com/article/10.1007/s00466-026-02834-2 <https://link.springer.com/article/10.1007/s00466-026-02834-2>`_. For a more visual and faster experience we recommend using the generated documentation, which provides interactive views and graphs: `Documentation and interactive views <https://doublegradientcorrectionmethod.readthedocs.io/en/latest/>`_.
 
-.. warning::
+.. highlights::
 
    The simulations, examples, and results presented in this paper and the
    associated repository should be reproduced using **PhaseFieldX v0.3.1**,
