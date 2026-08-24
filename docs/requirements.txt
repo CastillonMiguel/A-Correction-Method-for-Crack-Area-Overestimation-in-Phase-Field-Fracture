@@ -22,4 +22,4 @@ sphinxcontrib-bibtex
 sphinxcontrib-tikz
 pyvista[jupyter]
 gmsh
-phasefieldx
+phasefieldx==0.3.1
